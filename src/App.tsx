@@ -9,7 +9,7 @@ import LoadingScreen from './components/LoadingScreen'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
-  const [showChat, setShowChat] = useState(false)
+  const [showChat, setShowChat] = useState(true)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,10 +18,6 @@ function App() {
 
     return () => clearTimeout(timer)
   }, [])
-
-  const handleStartChat = () => {
-    setShowChat(true)
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-black via-purple-900 to-slate-900">
@@ -38,31 +34,15 @@ function App() {
           >
             <Header />
             
-            <AnimatePresence mode="wait">
-              {!showChat ? (
-                <motion.div
-                  key="landing"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Hero onStartChat={handleStartChat} />
-                  <Features />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="chat"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <ChatInterface onBack={() => setShowChat(false)} />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <motion.div
+              key="chat"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ChatInterface onBack={() => setShowChat(false)} />
+            </motion.div>
             
-            {!showChat && <Footer />}
           </motion.div>
         )}
       </AnimatePresence>
