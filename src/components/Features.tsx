@@ -72,7 +72,7 @@ const Features = () => {
 
   return (
     <section id="features" className="py-20 px-6">
-      <div className="container mx-auto">
+      <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,10 +80,10 @@ const Features = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Comprehensive <span className="gradient-text">Capabilities</span>
           </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto text-balance">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance">
             II-Agent excels across multiple domains, providing intelligent assistance 
             for complex tasks that require reasoning, creativity, and technical expertise.
           </p>
@@ -98,17 +98,17 @@ const Features = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="glass-effect rounded-2xl p-8 group hover:glow-effect transition-all duration-300"
+              className="bg-white rounded-2xl p-8 group hover:glow-effect transition-all duration-300 webflow-shadow-lg smooth-hover border border-gray-200"
             >
               <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 <feature.icon className="w-6 h-6 text-white" />
               </div>
               
-              <h3 className="text-xl font-semibold text-white mb-4 group-hover:gradient-text transition-all duration-300">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 transition-all duration-300">
                 {feature.title}
               </h3>
               
-              <p className="text-white/70 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>

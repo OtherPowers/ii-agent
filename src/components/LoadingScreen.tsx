@@ -7,7 +7,7 @@ const LoadingScreen = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-white flex items-center justify-center z-50"
     >
       <div className="text-center">
         <motion.div
@@ -20,9 +20,9 @@ const LoadingScreen = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-full h-full border-4 border-purple-500/30 border-t-purple-400 rounded-full"
+              className="w-full h-full border-4 border-gray-200 border-t-gray-900 rounded-full"
             />
-            <div className="absolute inset-2 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center">
+            <div className="absolute inset-2 bg-gray-900 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-xl">II</span>
             </div>
           </div>
@@ -41,6 +41,7 @@ const LoadingScreen = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-white/70 text-lg"
+            className="text-gray-600 text-lg"
           >
             Initializing Intelligent Assistant...
           </motion.p>
@@ -64,7 +65,7 @@ const LoadingScreen = () => {
                 repeat: Infinity,
                 delay: i * 0.2,
               }}
-              className="w-3 h-3 bg-purple-400 rounded-full"
+              className="w-3 h-3 bg-gray-900 rounded-full"
             />
           ))}
         </motion.div>

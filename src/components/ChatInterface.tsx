@@ -91,27 +91,27 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
       transition={{ duration: 0.5 }}
       className="fixed inset-0 pt-20 pb-6 px-6"
     >
-      <div className="h-full max-w-6xl mx-auto flex flex-col glass-effect rounded-3xl overflow-hidden">
+      <div className="h-full max-w-6xl mx-auto flex flex-col bg-white rounded-3xl overflow-hidden webflow-shadow-lg border border-gray-200">
         {/* Chat Header */}
-        <div className="flex items-center justify-between p-6 border-b border-white/10">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div className="flex items-center space-x-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onBack}
-              className="p-2 glass-effect rounded-xl text-white/80 hover:text-white transition-colors"
+              className="p-2 bg-gray-100 rounded-xl text-gray-600 hover:text-gray-900 transition-colors webflow-shadow"
             >
               <ArrowLeft className="w-5 h-5" />
             </motion.button>
             <div>
-              <h2 className="text-xl font-semibold text-white">Chat with II-Agent</h2>
-              <p className="text-white/60 text-sm">Intelligent Assistant • Online</p>
+              <h2 className="text-xl font-semibold text-gray-900">Chat with II-Agent</h2>
+              <p className="text-gray-600 text-sm">Intelligent Assistant • Online</p>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-white/60 text-sm">Connected</span>
+            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+            <span className="text-gray-600 text-sm">Connected</span>
           </div>
         </div>
         
@@ -130,8 +130,8 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
               >
                 <div className={`w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 ${
                   message.type === 'user' 
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600' 
-                    : 'bg-gradient-to-r from-purple-600 to-pink-600'
+                    ? 'bg-gray-900' 
+                    : 'bg-gray-700'
                 }`}>
                   {message.type === 'user' ? (
                     <User className="w-5 h-5 text-white" />
@@ -158,7 +158,7 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
               animate={{ opacity: 1, y: 0 }}
               className="flex items-start space-x-3"
             >
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-gray-700 rounded-2xl flex items-center justify-center">
                 <Bot className="w-5 h-5 text-white" />
               </div>
               <div className="chat-bubble-agent">
@@ -174,8 +174,8 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
         </div>
         
         {/* Input Area */}
-        <div className="p-6 border-t border-white/10">
-          <div className="glass-effect rounded-2xl p-4">
+        <div className="p-6 border-t border-gray-200">
+          <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200">
             <div className="flex items-end space-x-4">
               <div className="flex-1">
                 <textarea
@@ -184,7 +184,7 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Ask me anything... I can help with research, coding, analysis, and more!"
-                  className="w-full bg-transparent text-white placeholder-white/50 resize-none outline-none min-h-[60px] max-h-32"
+                  className="w-full bg-transparent text-gray-900 placeholder-gray-500 resize-none outline-none min-h-[60px] max-h-32"
                   rows={1}
                   style={{ 
                     height: 'auto',
@@ -202,7 +202,7 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-3 glass-effect rounded-xl text-white/80 hover:text-white transition-colors"
+                  className="p-3 bg-white rounded-xl text-gray-600 hover:text-gray-900 transition-colors webflow-shadow border border-gray-200"
                 >
                   <Paperclip className="w-5 h-5" />
                 </motion.button>
@@ -214,7 +214,7 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
                   className={`p-3 rounded-xl transition-all duration-300 ${
                     isRecording 
                       ? 'bg-red-500 text-white' 
-                      : 'glass-effect text-white/80 hover:text-white'
+                      : 'bg-white text-gray-600 hover:text-gray-900 webflow-shadow border border-gray-200'
                   }`}
                 >
                   {isRecording ? <Square className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
@@ -225,7 +225,7 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
                   whileTap={{ scale: 0.95 }}
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isTyping}
-                  className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-white disabled:opacity-50 disabled:cursor-not-allowed glow-effect transition-all duration-300"
+                  className="p-3 bg-gray-900 rounded-xl text-white disabled:opacity-50 disabled:cursor-not-allowed glow-effect transition-all duration-300 webflow-shadow"
                 >
                   <Send className="w-5 h-5" />
                 </motion.button>
@@ -234,6 +234,7 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
           </div>
           
           <div className="flex items-center justify-between mt-4 text-xs text-white/50">
+          <div className="flex items-center justify-between mt-4 text-xs text-gray-500">
             <span>Press Enter to send, Shift+Enter for new line</span>
             <span>Powered by Claude Sonnet 4</span>
           </div>
