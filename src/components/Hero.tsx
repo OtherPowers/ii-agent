@@ -67,17 +67,17 @@ const Hero = ({ onStartChat }: HeroProps) => {
           className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
         >
           {[
-            { icon: Brain, title: "Advanced Reasoning", desc: "Multi-step problem solving with Claude Sonnet 4", color: "bg-blue-50 text-blue-700" },
-            { icon: Zap, title: "Real-time Execution", desc: "Live code execution and web interaction", color: "bg-green-50 text-green-700" },
-            { icon: Sparkles, title: "Multi-modal", desc: "Text, images, audio, and video processing", color: "bg-purple-50 text-purple-700" }
+            { icon: Brain, title: "Advanced Reasoning", desc: "Multi-step problem solving with Claude Sonnet 4", color: "holographic-icon cinematic-glow-blue" },
+            { icon: Zap, title: "Real-time Execution", desc: "Live code execution and web interaction", color: "holographic-icon cinematic-glow-green" },
+            { icon: Sparkles, title: "Multi-modal", desc: "Text, images, audio, and video processing", color: "holographic-icon cinematic-glow-purple" }
           ].map((feature, index) => (
             <motion.div
               key={index}
               whileHover={{ y: -5, scale: 1.02 }}
               className="bg-white rounded-2xl p-8 group hover:glow-effect transition-all duration-300 webflow-shadow smooth-hover border border-gray-200"
             >
-              <div className={`w-12 h-12 ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <feature.icon className="w-6 h-6" />
+              <div className={`w-12 h-12 ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 animate-cinematic-pulse`}>
+                <feature.icon className="w-6 h-6 text-white drop-shadow-lg" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4 transition-all duration-300">{feature.title}</h3>
               <p className="text-gray-600 leading-relaxed">{feature.desc}</p>

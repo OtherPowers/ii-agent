@@ -152,13 +152,13 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
             ))}
           </AnimatePresence>
           
-          {isTyping && (
-            <motion.div
+                  ? 'bg-gray-900 holographic-icon cinematic-glow-gray' 
+                  : 'bg-gray-700 holographic-icon cinematic-glow-blue'
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="flex items-start space-x-3"
             >
-              <div className="w-10 h-10 bg-gray-700 rounded-2xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-gray-700 rounded-2xl flex items-center justify-center holographic-icon cinematic-glow-blue">
                 <Bot className="w-5 h-5 text-white" />
               </div>
               <div className="chat-bubble-agent">
@@ -202,7 +202,7 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-3 bg-white rounded-xl text-gray-600 hover:text-gray-900 transition-colors webflow-shadow border border-gray-200"
+                  className="p-3 bg-white rounded-xl text-gray-600 hover:text-gray-900 transition-colors webflow-shadow border border-gray-200 holographic-icon cinematic-glow-gray"
                 >
                   <Paperclip className="w-5 h-5" />
                 </motion.button>
@@ -213,8 +213,8 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
                   onClick={toggleRecording}
                   className={`p-3 rounded-xl transition-all duration-300 ${
                     isRecording 
-                      ? 'bg-red-500 text-white' 
-                      : 'bg-white text-gray-600 hover:text-gray-900 webflow-shadow border border-gray-200'
+                      ? 'bg-red-500 text-white holographic-icon cinematic-glow-pink' 
+                      : 'bg-white text-gray-600 hover:text-gray-900 webflow-shadow border border-gray-200 holographic-icon cinematic-glow-orange'
                   }`}
                 >
                   {isRecording ? <Square className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
@@ -225,7 +225,7 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
                   whileTap={{ scale: 0.95 }}
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isTyping}
-                  className="p-3 bg-gray-900 rounded-xl text-white disabled:opacity-50 disabled:cursor-not-allowed glow-effect transition-all duration-300 webflow-shadow"
+                  className="p-3 bg-gray-900 rounded-xl text-white disabled:opacity-50 disabled:cursor-not-allowed glow-effect transition-all duration-300 webflow-shadow holographic-icon cinematic-glow-indigo"
                 >
                   <Send className="w-5 h-5" />
                 </motion.button>

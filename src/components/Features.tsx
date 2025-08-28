@@ -18,55 +18,55 @@ const Features = () => {
       icon: Search,
       title: "Research & Analysis",
       description: "Deep web research, fact-checking, and comprehensive data analysis with source verification.",
-      color: "from-blue-500 to-cyan-500"
+      color: "holographic-icon cinematic-glow-blue"
     },
     {
       icon: Code,
       title: "Software Development",
       description: "Full-stack development, code generation, debugging, and automated testing across multiple languages.",
-      color: "from-green-500 to-emerald-500"
+      color: "holographic-icon cinematic-glow-green"
     },
     {
       icon: Globe,
       title: "Web Automation",
       description: "Browser automation, web scraping, and dynamic website creation with live deployment.",
-      color: "from-purple-500 to-violet-500"
+      color: "holographic-icon cinematic-glow-purple"
     },
     {
       icon: FileText,
       title: "Content Creation",
       description: "Technical documentation, articles, presentations, and multimedia content generation.",
-      color: "from-orange-500 to-red-500"
+      color: "holographic-icon cinematic-glow-orange"
     },
     {
       icon: Database,
       title: "Data Processing",
       description: "Advanced data manipulation, visualization, and automated report generation.",
-      color: "from-teal-500 to-blue-500"
+      color: "holographic-icon cinematic-glow-teal"
     },
     {
       icon: Terminal,
       title: "System Operations",
       description: "Command-line automation, file management, and workflow optimization.",
-      color: "from-gray-500 to-slate-500"
+      color: "holographic-icon cinematic-glow-gray"
     },
     {
       icon: Palette,
       title: "Media Generation",
       description: "AI-powered image, video, and audio generation with professional quality output.",
-      color: "from-pink-500 to-rose-500"
+      color: "holographic-icon cinematic-glow-pink"
     },
     {
       icon: Layers,
       title: "Multi-modal AI",
       description: "Process and understand text, images, audio, video, and documents seamlessly.",
-      color: "from-indigo-500 to-purple-500"
+      color: "holographic-icon cinematic-glow-indigo"
     },
     {
       icon: Workflow,
       title: "Task Automation",
       description: "Complex workflow automation with intelligent decision-making and error handling.",
-      color: "from-yellow-500 to-orange-500"
+      color: "holographic-icon cinematic-glow-yellow"
     }
   ]
 
@@ -100,8 +100,8 @@ const Features = () => {
               whileHover={{ y: -8, scale: 1.02 }}
               className="bg-white rounded-2xl p-8 group hover:glow-effect transition-all duration-300 webflow-shadow-lg smooth-hover border border-gray-200"
             >
-              <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <feature.icon className="w-6 h-6 text-white" />
+              <div className={`w-12 h-12 ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 animate-cinematic-pulse`}>
+                <feature.icon className="w-6 h-6 text-white drop-shadow-lg" />
               </div>
               
               <h3 className="text-xl font-semibold text-gray-900 mb-4 transition-all duration-300">

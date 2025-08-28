@@ -20,9 +20,9 @@ const LoadingScreen = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-full h-full border-4 border-gray-200 border-t-gray-900 rounded-full"
+              className="w-full h-full border-4 border-gray-200 border-t-gray-900 rounded-full holographic-icon"
             />
-            <div className="absolute inset-2 bg-gray-900 rounded-full flex items-center justify-center">
+            <div className="absolute inset-2 bg-gray-900 rounded-full flex items-center justify-center holographic-icon cinematic-glow-gray">
               <span className="text-white font-bold text-xl">II</span>
             </div>
           </div>
