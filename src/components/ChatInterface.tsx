@@ -93,23 +93,30 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
     >
       <div className="h-full max-w-6xl mx-auto flex flex-col bg-white rounded-3xl overflow-hidden webflow-shadow-lg border border-gray-200">
         {/* Chat Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="relative flex items-center justify-between p-6 border-b border-gray-200 overflow-hidden">
+          <div className="glow-container">
+            <div className="ball"></div>
+            <div className="ball" style={{"--delay": "-12s", "--size": "0.35", "--speed": "25s"} as React.CSSProperties}></div>
+            <div className="ball" style={{"--delay": "-10s", "--size": "0.3", "--speed": "15s"} as React.CSSProperties}></div>
+          </div>
           <div className="flex items-center space-x-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onBack}
-              className="p-2 bg-gray-100 rounded-xl text-gray-600 hover:text-gray-900 transition-colors webflow-shadow"
+              className="relative z-10 p-2 bg-gray-100 rounded-xl text-gray-600 hover:text-gray-900 transition-colors webflow-shadow"
             >
               <ArrowLeft className="w-5 h-5" />
             </motion.button>
-            <div>
-              <h2 className="text-xl font-semibold text-gray-900">Chat with II-Agent</h2>
+            <div className="relative z-10">
+              <h2 className="text-xl font-semibold text-gray-900 bg-gradient-to-r from-blue-600 via-purple-600 to-orange-500 bg-clip-text text-transparent">
+                Chat with II-Agent
+              </h2>
               <p className="text-gray-600 text-sm">Intelligent Assistant • Online</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-2">
+          <div className="relative z-10 flex items-center space-x-2">
             <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
             <span className="text-gray-600 text-sm">Connected</span>
           </div>
