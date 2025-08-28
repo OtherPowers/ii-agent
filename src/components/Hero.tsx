@@ -22,12 +22,12 @@ const Hero = ({ onStartChat }: HeroProps) => {
           </div>
           
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-gray-900">Intelligent </span>
+            <span className="text-gray-900" style={{ fontSize: 'calc(1em - 2px)' }}>Intelligent Assistant Platform</span>
             <span className="gradient-text">Assistant </span>
             <span className="text-gray-900">Platform</span>
           </h1>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 text-balance">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8 text-balance">
             Experience the future of AI assistance with II-Agent. From research and content creation 
             to software development and workflow automation—all powered by cutting-edge language models.
           </p>
