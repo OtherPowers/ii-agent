@@ -233,7 +233,6 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
             </div>
           </div>
           
-          <div className="flex items-center justify-between mt-4 text-xs text-white/50">
           <div className="flex items-center justify-between mt-4 text-xs text-gray-500">
             <span>Press Enter to send, Shift+Enter for new line</span>
             <span>Powered by Claude Sonnet 4</span>
