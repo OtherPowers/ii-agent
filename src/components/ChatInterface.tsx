@@ -152,8 +152,8 @@ const ChatInterface = ({ onBack }: ChatInterfaceProps) => {
             ))}
           </AnimatePresence>
           
-                  ? 'bg-gray-900 holographic-icon cinematic-glow-gray' 
-                  : 'bg-gray-700 holographic-icon cinematic-glow-blue'
+          {isTyping && (
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="flex items-start space-x-3"
