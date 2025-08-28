@@ -22,10 +22,8 @@ const Hero = ({ onStartChat }: HeroProps) => {
           </div>
           
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-gray-900">Intelligent</span>
-            <br />
-            <span className="gradient-text">Assistant</span>
-            <br />
+            <span className="text-gray-900">Intelligent </span>
+            <span className="gradient-text">Assistant </span>
             <span className="text-gray-900">Platform</span>
           </h1>
           
