@@ -82,10 +82,9 @@ You can view the full traces of some samples here: [GAIA Benchmark Traces](https
 
 ## Installation
 
-
-
-<https://github.com/user-attachments/assets/afcf8eee-c11b-424c-8740-3aa60ca795ee>
-
+> **Note for Development**: When running npm commands manually, make sure to navigate to the correct directory first:
+> - For frontend dependencies: `cd frontend && npm install`
+> - The main project uses Docker for dependency management, so manual npm commands should typically be run from the appropriate subdirectory.
 
 ### Docker Installation (Recommended)
 
