@@ -15,7 +15,7 @@ const Footer = () => {
         >
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center holographic-icon cinematic-glow-gray">
+              <div className="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-lg">II</span>
               </div>
               <div>
@@ -50,9 +50,9 @@ const Footer = () => {
             <h4 className="text-gray-900 font-semibold mb-4">Connect</h4>
             <div className="flex space-x-4">
               {[
-                { icon: Github, href: 'https://github.com/Intelligent-Internet/ii-agent', glow: 'cinematic-glow-gray' },
-                { icon: Twitter, href: '#', glow: 'cinematic-glow-blue' },
-                { icon: Globe, href: 'https://ii.inc', glow: 'cinematic-glow-green' }
+                { icon: Github, href: 'https://github.com/Intelligent-Internet/ii-agent' },
+                { icon: Twitter, href: '#' },
+                { icon: Globe, href: 'https://ii.inc' }
               ].map((social, index) => (
                 <motion.a
                   key={index}
@@ -61,7 +61,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-3 bg-white rounded-xl text-gray-600 hover:text-gray-900 transition-colors webflow-shadow border border-gray-200 holographic-icon ${social.glow}`}
+                  className="p-3 bg-white rounded-xl text-gray-600 hover:text-gray-900 transition-colors webflow-shadow border border-gray-200"
                 >
                   <social.icon className="w-5 h-5" />
                 </motion.a>

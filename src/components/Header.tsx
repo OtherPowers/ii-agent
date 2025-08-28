@@ -16,7 +16,7 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-3"
           >
-            <div className="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center holographic-icon cinematic-glow-gray">
+            <div className="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center">
               <span className="text-white font-bold text-lg">II</span>
             </div>
             <div>
@@ -58,14 +58,14 @@ const Header = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-2 bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900 transition-colors webflow-shadow holographic-icon cinematic-glow-gray"
+              className="p-2 bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900 transition-colors webflow-shadow"
             >
               <Settings className="w-5 h-5" />
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-2 bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900 transition-colors webflow-shadow holographic-icon cinematic-glow-blue"
+              className="p-2 bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900 transition-colors webflow-shadow"
             >
               <MessageSquare className="w-5 h-5" />
             </motion.button>

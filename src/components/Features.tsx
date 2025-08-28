@@ -18,55 +18,55 @@ const Features = () => {
       icon: Search,
       title: "Research & Analysis",
       description: "Deep web research, fact-checking, and comprehensive data analysis with source verification.",
-      color: "holographic-icon cinematic-glow-blue"
+      color: "bg-blue-100"
     },
     {
       icon: Code,
       title: "Software Development",
       description: "Full-stack development, code generation, debugging, and automated testing across multiple languages.",
-      color: "holographic-icon cinematic-glow-green"
+      color: "bg-green-100"
     },
     {
       icon: Globe,
       title: "Web Automation",
       description: "Browser automation, web scraping, and dynamic website creation with live deployment.",
-      color: "holographic-icon cinematic-glow-purple"
+      color: "bg-purple-100"
     },
     {
       icon: FileText,
       title: "Content Creation",
       description: "Technical documentation, articles, presentations, and multimedia content generation.",
-      color: "holographic-icon cinematic-glow-orange"
+      color: "bg-orange-100"
     },
     {
       icon: Database,
       title: "Data Processing",
       description: "Advanced data manipulation, visualization, and automated report generation.",
-      color: "holographic-icon cinematic-glow-teal"
+      color: "bg-teal-100"
     },
     {
       icon: Terminal,
       title: "System Operations",
       description: "Command-line automation, file management, and workflow optimization.",
-      color: "holographic-icon cinematic-glow-gray"
+      color: "bg-gray-100"
     },
     {
       icon: Palette,
       title: "Media Generation",
       description: "AI-powered image, video, and audio generation with professional quality output.",
-      color: "holographic-icon cinematic-glow-pink"
+      color: "bg-pink-100"
     },
     {
       icon: Layers,
       title: "Multi-modal AI",
       description: "Process and understand text, images, audio, video, and documents seamlessly.",
-      color: "holographic-icon cinematic-glow-indigo"
+      color: "bg-indigo-100"
     },
     {
       icon: Workflow,
       title: "Task Automation",
       description: "Complex workflow automation with intelligent decision-making and error handling.",
-      color: "holographic-icon cinematic-glow-yellow"
+      color: "bg-yellow-100"
     }
   ]
 
@@ -98,10 +98,10 @@ const Features = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="bg-white rounded-2xl p-8 group hover:glow-effect transition-all duration-300 webflow-shadow-lg smooth-hover border border-gray-200"
+              className="bg-white rounded-2xl p-8 group transition-all duration-300 webflow-shadow-lg smooth-hover border border-gray-200"
             >
-              <div className={`w-12 h-12 ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 animate-cinematic-pulse`}>
-                <feature.icon className="w-6 h-6 text-white drop-shadow-lg" />
+              <div className={`w-12 h-12 ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300`}>
+                <feature.icon className="w-6 h-6 text-gray-700" />
               </div>
               
               <h3 className="text-xl font-semibold text-gray-900 mb-4 transition-all duration-300">
