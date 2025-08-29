@@ -22,8 +22,8 @@ const LoadingScreen = () => {
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               className="w-full h-full border-4 border-gray-200 border-t-gray-900 rounded-full"
             />
-            <div className="absolute inset-2 bg-gray-900 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xl">II</span>
+            <div className="absolute inset-2 bg-white rounded-full flex items-center justify-center border border-gray-200">
+              <span className="text-gray-500 font-bold text-xl">II</span>
             </div>
           </div>
           
