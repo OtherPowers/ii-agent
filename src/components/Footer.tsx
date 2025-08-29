@@ -20,7 +20,7 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900">II-Agent</h3>
-                <p className="text-gray-600 text-sm">Intelligent Assistant Platform</p>
+                <p className="text-gray-600 text-sm">Intelligent Internet Platform</p>
               </div>
             </div>
             <p className="text-gray-600 leading-relaxed max-w-md">

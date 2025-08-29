@@ -21,7 +21,7 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold text-gray-900">II-Agent</h1>
-              <p className="text-xs text-gray-600">Intelligent Assistant Platform</p>
+              <p className="text-xs text-gray-600">Intelligent Internet Platform</p>
             </div>
           </motion.div>
           
