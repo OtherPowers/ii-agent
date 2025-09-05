@@ -16,106 +16,93 @@ const LoadingScreen = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-8"
         >
-          <div className="w-32 h-32 mx-auto mb-6 relative">
-            {/* Oil-in-water holographic lava lamp */}
-            <motion.div
-              className="w-full h-full relative overflow-hidden rounded-full"
-              style={{
-                background: 'radial-gradient(circle at 30% 20%, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)',
-                filter: 'blur(1px) contrast(1.2) saturate(1.3)'
-              }}
-            >
-              {/* Floating oil blobs */}
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  animate={{
-                    x: [
-                      Math.cos(i * 45 * Math.PI / 180) * 20,
-                      Math.cos((i * 45 + 180) * Math.PI / 180) * 25,
-                      Math.cos(i * 45 * Math.PI / 180) * 20
-                    ],
-                    y: [
-                      Math.sin(i * 45 * Math.PI / 180) * 20,
-                      Math.sin((i * 45 + 180) * Math.PI / 180) * 25,
-                      Math.sin(i * 45 * Math.PI / 180) * 20
-                    ],
-                    scale: [0.8, 1.2, 0.8],
-                    opacity: [0.6, 0.9, 0.6]
-                  }}
-                  transition={{
-                    duration: 4 + i * 0.3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.2
-                  }}
-                  className="absolute top-1/2 left-1/2 rounded-full transform -translate-x-1/2 -translate-y-1/2"
-                  style={{
-                    width: `${12 + i * 2}px`,
-                    height: `${12 + i * 2}px`,
-                    background: `radial-gradient(circle, hsla(${i * 45 + 200}, 80%, 70%, 0.8) 0%, hsla(${i * 45 + 280}, 70%, 60%, 0.4) 100%)`,
-                    filter: 'blur(0.5px)'
-                  }}
-                />
-              ))}
-              
-              {/* Swirling background gradient */}
-              <motion.div
-                animate={{ 
-                  rotate: 360,
-                  background: [
-                    'conic-gradient(from 0deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #667eea)',
-                    'conic-gradient(from 120deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #667eea)',
-                    'conic-gradient(from 240deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #667eea)',
-                    'conic-gradient(from 360deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #667eea)'
-                  ]
-                }}
-                transition={{ 
-                  rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                  background: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-                }}
-                className="absolute inset-0 rounded-full opacity-60"
-                style={{ filter: 'blur(2px)' }}
-              />
-              
-              {/* Central holographic core */}
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.05, 1],
-                  filter: [
-                    'hue-rotate(0deg) saturate(1.2)',
-                    'hue-rotate(60deg) saturate(1.4)',
-                    'hue-rotate(120deg) saturate(1.2)',
-                    'hue-rotate(0deg) saturate(1.2)'
-                  ]
-                }}
-                transition={{ 
-                  scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-                  filter: { duration: 5, repeat: Infinity, ease: "easeInOut" }
-                }}
-                className="absolute inset-6 rounded-full flex items-center justify-center"
-                style={{
-                  background: 'radial-gradient(circle at 40% 30%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 30%, transparent 70%)',
-                  backdropFilter: 'blur(1px)',
-                  border: '1px solid rgba(255,255,255,0.2)'
-                }}
-              >
-                <motion.span 
-                  animate={{ 
-                    color: ["#ffffff", "#e0f2fe", "#f0f9ff", "#ffffff"],
-                    textShadow: [
-                      "0 0 8px rgba(255,255,255,0.8)",
-                      "0 0 12px rgba(102,126,234,0.6)",
-                      "0 0 8px rgba(255,255,255,0.8)"
-                    ]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-white font-bold text-xl tracking-wider"
-                >
-                  II
-                </motion.span>
-              </motion.div>
-            </motion.div>
+          <div className="w-32 h-32 mx-auto mb-6 relative overflow-hidden rounded-full">
+            {/* Oil-in-water holographic lava lamp container */}
+            <div className="lava-lamp-container">
+              <div className="lava-lamp-blobs">
+                <svg viewBox="0 0 1200 1200" className="w-full h-full">
+                  {/* Main blobs */}
+                  <g className="blob blob-1">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      fill="#984ddf"
+                      style={{ filter: 'blur(1rem)', opacity: 0.7 }}
+                    />
+                  </g>
+                  <g className="blob blob-2">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 7,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1
+                      }}
+                      fill="#4344ad"
+                      style={{ filter: 'blur(0.75rem)', opacity: 0.7, transform: 'scale(0.78)' }}
+                    />
+                  </g>
+                  <g className="blob blob-3">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 2
+                      }}
+                      fill="#74d9e1"
+                      style={{ filter: 'blur(0.5rem)', opacity: 0.7, transform: 'scale(0.76)' }}
+                    />
+                  </g>
+                  <g className="blob blob-4">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                </g>
+                <g className="blob blob-2 alt">
+                  <path />
+                </g>
+                <g className="blob blob-3 alt">
+                  <path />
+                </g>
+                <g className="blob blob-4 alt">
+                  <path />
+                </g>
+              </svg>
+            </div>
           </div>
           
           <motion.h1
