@@ -16,10 +16,6 @@ const Hero = ({ onStartChat }: HeroProps) => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-8"
         >
-          <div className="inline-flex items-center space-x-2 bg-gray-100 rounded-full px-4 py-2 mb-6 webflow-shadow">
-            <Sparkles className="w-4 h-4 text-gray-700" />
-          </div>
-          
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="text-gray-900" style={{ fontSize: 'calc(0.7em - 4px)' }}>Intelligent Internet Platform</span>
           </h1>
