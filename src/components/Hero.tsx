@@ -17,7 +17,6 @@ const Hero = ({ onStartChat }: HeroProps) => {
           className="mb-8"
         >
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-gray-900" style={{ fontSize: 'calc(0.7em - 4px)' }}>Intelligent Internet Platform</span>
           </h1>
           
           <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8 text-balance">
