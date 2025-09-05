@@ -1,338 +1,143 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import React from 'react'
+import { motion } from 'framer-motion'
 
-/* Shimmer animation for buttons */
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%) rotate(45deg);
-  }
-  100% {
-    transform: translateX(300%) rotate(45deg);
-  }
+const LoadingScreen = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-white flex items-center justify-center z-50"
+    >
+      <div className="text-center">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mb-8"
+        >
+          <div className="w-32 h-32 mx-auto mb-6 relative overflow-hidden rounded-full">
+            {/* Oil-in-water holographic lava lamp container */}
+            <div className="lava-lamp-container">
+              <div className="lava-lamp-blobs">
+                <svg viewBox="0 0 1200 1200" className="w-full h-full">
+                  {/* Main blobs */}
+                  <g className="blob blob-1">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      fill="#984ddf"
+                      style={{ filter: 'blur(1rem)', opacity: 0.7 }}
+                    />
+                  </g>
+                  <g className="blob blob-2">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 7,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1
+                      }}
+                      fill="#4344ad"
+                      style={{ filter: 'blur(0.75rem)', opacity: 0.7, transform: 'scale(0.78)' }}
+                    />
+                  </g>
+                  <g className="blob blob-3">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 2
+                      }}
+                      fill="#74d9e1"
+                      style={{ filter: 'blur(0.5rem)', opacity: 0.7, transform: 'scale(0.76)' }}
+                    />
+                  </g>
+                  <g className="blob blob-4">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z"
+                        ]
+                      }}
+          </div>
+          
+          <motion.h1
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-4xl font-bold gradient-text mb-4"
+          >
+            II-Agent
+          </motion.h1>
+          
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="text-white/70 text-lg"
+            className="text-gray-600 text-lg"
+          >
+            Initializing Intelligent Assistant...
+          </motion.p>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          className="flex justify-center space-x-2"
+        >
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+              className="w-3 h-3 bg-gray-900 rounded-full"
+            />
+          ))}
+        </motion.div>
+      </div>
+    </motion.div>
+  )
 }
 
-.shimmer-button {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.5) 50%,
-    transparent 70%
-  );
-  transform: translateX(-100%) rotate(45deg);
-  transition: transform 0.6s;
-  pointer-events: none;
-}
-
-.shimmer-button:hover::before {
-  animation: shimmer 0.6s ease-out;
-}
-
-.shimmer-button-dark {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer-button-dark::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.2) 50%,
-    transparent 70%
-  );
-  transform: translateX(-100%) rotate(45deg);
-  transition: transform 0.6s;
-  pointer-events: none;
-}
-
-.shimmer-button-dark:hover::before {
-  animation: shimmer 0.6s ease-out;
-}
-
-/* Lava lamp loader styles */
-.container,
-.palette-1 {
-  --bg-0: #101030;
-  --bg-1: #050515;
-  --blob-1: #984ddf;
-  --blob-2: #4344ad;
-  --blob-3: #74d9e1;
-  --blob-4: #050515;
-}
-
-.palette-2 {
-  --bg-0: #545454;
-  --bg-1: #150513;
-  --blob-1: #ff3838;
-  --blob-2: #ff9d7c;
-  --blob-3: #ffdda0;
-  --blob-4: #fff6ea;
-}
-
-.palette-3 {
-  --bg-0: #300030;
-  --bg-1: #000000;
-  --blob-1: #291528;
-  --blob-2: #3a3e3b;
-  --blob-3: #9e829c;
-  --blob-4: #f0eff4;
-}
-
-.palette-4 {
-  --bg-0: #ffffff;
-  --bg-1: #d3f7ff;
-  --blob-1: #bb74ff;
-  --blob-2: #7c7dff;
-  --blob-3: #a0f8ff;
-  --blob-4: #ffffff;
-}
-
-.palette-5 {
-  --bg-0: #968e85;
-  --bg-1: #8cc084;
-  --blob-1: #c1d7ae;
-  --blob-2: #9eff72;
-  --blob-3: #ffcab1;
-  --blob-4: #ecdcb0;
-}
-
-.palette-6 {
-  --bg-0: #ffffff;
-  --bg-1: #4e598c;
-  --blob-1: #ff8c42;
-  --blob-2: #fcaf58;
-  --blob-3: #f9c784;
-  --blob-4: #ffffff;
-}
-
-.container {
-  background: var(--bg-1);
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 1000ms ease;
-}
-
-.container::after {
-  position: absolute;
-  content: "";
-  width: min(50vw, 50vh);
-  height: min(50vw, 50vh);
-  background: var(--bg-0);
-  border-radius: 50%;
-  filter: blur(10rem);
-  transition: background 500ms ease;
-}
-
-.blobs {
-  width: min(60vw, 60vh);
-  height: min(60vw, 60vh);
-  max-height: 100%;
-  max-width: 100%;
-}
-
-.blobs svg {
-  position: relative;
-  height: 100%;
-  z-index: 2;
-}
-
-.blobs .blob {
-  animation: rotate 25s infinite alternate ease-in-out;
-  transform-origin: 50% 50%;
-  opacity: 0.7;
-}
-
-.blobs .blob path {
-  animation: blob-anim-1 5s infinite alternate cubic-bezier(0.45, 0.2, 0.55, 0.8);
-  transform-origin: 50% 50%;
-  transform: scale(0.8);
-  transition: fill 800ms ease;
-}
-
-.blobs .blob.alt {
-  animation-direction: alternate-reverse;
-  opacity: 0.3;
-}
-
-.blobs .blob-1 path {
-  fill: var(--blob-1);
-  filter: blur(1rem);
-}
-
-.blobs .blob-2 {
-  animation-duration: 18s;
-  animation-direction: alternate-reverse;
-}
-
-.blobs .blob-2 path {
-  fill: var(--blob-2);
-  animation-name: blob-anim-2;
-  animation-duration: 7s;
-  filter: blur(0.75rem);
-  transform: scale(0.78);
-}
-
-.blobs .blob-2.alt {
-  animation-direction: alternate;
-}
-
-.blobs .blob-3 {
-  animation-duration: 23s;
-}
-
-.blobs .blob-3 path {
-  fill: var(--blob-3);
-  animation-name: blob-anim-3;
-  animation-duration: 6s;
-  filter: blur(0.5rem);
-  transform: scale(0.76);
-}
-
-.blobs .blob-4 {
-  animation-duration: 31s;
-  animation-direction: alternate-reverse;
-  opacity: 0.9;
-}
-
-.blobs .blob-4 path {
-  fill: var(--blob-4);
-  animation-name: blob-anim-4;
-  animation-duration: 10s;
-  filter: blur(10rem);
-  transform: scale(0.5);
-}
-
-.blobs .blob-4.alt {
-  animation-direction: alternate;
-  opacity: 0.8;
-}
-
-@keyframes blob-anim-1 {
-  0% {
-    d: path("M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z");
-  }
-  30% {
-    d: path("M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z");
-  }
-  70% {
-    d: path("M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z");
-  }
-  100% {
-    d: path("M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z");
-  }
-}
-
-@keyframes blob-anim-2 {
-  0% {
-    d: path("M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z");
-  }
-  40% {
-    d: path("M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z");
-  }
-  80% {
-    d: path("M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z");
-  }
-  100% {
-    d: path("M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z");
-  }
-}
-
-@keyframes blob-anim-3 {
-  0% {
-    d: path("M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z");
-  }
-  35% {
-    d: path("M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z");
-  }
-  75% {
-    d: path("M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z");
-  }
-  100% {
-    d: path("M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z");
-  }
-}
-
-@keyframes blob-anim-4 {
-  0% {
-    d: path("M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z");
-  }
-  30% {
-    d: path("M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z");
-  }
-  70% {
-    d: path("M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z");
-  }
-  100% {
-    d: path("M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z");
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.switcher {
-  position: absolute;
-  left: 1rem;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.switcher .switch-button {
-  cursor: pointer;
-  width: min(10vh, 5rem);
-  height: min(10vh, 5rem);
-  background: radial-gradient(var(--bg-0), var(--bg-1));
-  border-radius: 0.5rem;
-  backdrop-filter: blur(1rem);
-  border: 1px solid rgba(120, 120, 120, 0.5);
-}
-
-/* Loader specific styles */
-.loader-container {
-  width: 200px;
-  height: 200px;
-  position: relative;
-}
-
-.loader-container .container {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  position: relative;
-}
-
-.loader-container .blobs {
-  width: 100%;
-  height: 100%;
-}
+export default LoadingScreen

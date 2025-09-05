@@ -1,18 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 
 const LoadingScreen = () => {
-  useEffect(() => {
-    // Initialize the lava lamp effect
-    const container = document.querySelector(".loader-container .container");
-    const blobs = document.querySelector(".loader-container .blobs");
-    
-    if (container && blobs) {
-      // Set initial palette
-      container.classList.add("palette-1");
-    }
-  }, []);
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -27,24 +16,90 @@ const LoadingScreen = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-8"
         >
-          <div className="loader-container mx-auto mb-6">
-            <div className="container palette-1">
-              <div className="blobs">
-                <svg viewBox="0 0 1200 1200">
+          <div className="w-32 h-32 mx-auto mb-6 relative overflow-hidden rounded-full">
+            {/* Oil-in-water holographic lava lamp container */}
+            <div className="lava-lamp-container">
+              <div className="lava-lamp-blobs">
+                <svg viewBox="0 0 1200 1200" className="w-full h-full">
+                  {/* Main blobs */}
                   <g className="blob blob-1">
-                    <path />
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      fill="#984ddf"
+                      style={{ filter: 'blur(1rem)', opacity: 0.7 }}
+                    />
                   </g>
                   <g className="blob blob-2">
-                    <path />
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 7,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1
+                      }}
+                      fill="#4344ad"
+                      style={{ filter: 'blur(0.75rem)', opacity: 0.7, transform: 'scale(0.78)' }}
+                    />
                   </g>
                   <g className="blob blob-3">
-                    <path />
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 2
+                      }}
+                      fill="#74d9e1"
+                      style={{ filter: 'blur(0.5rem)', opacity: 0.7, transform: 'scale(0.76)' }}
+                    />
                   </g>
                   <g className="blob blob-4">
-                    <path />
-                  </g>
-                  <g className="blob blob-1 alt">
-                    <path />
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 3
+                      }}
+                      fill="#ff6b6b"
+                      style={{ filter: 'blur(0.25rem)', opacity: 0.7, transform: 'scale(0.74)' }}
+                    />
                   </g>
                   <g className="blob blob-2 alt">
                     <path />
