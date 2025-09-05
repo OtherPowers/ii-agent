@@ -95,7 +95,7 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-center"
+            className="text-center bg-white rounded-2xl p-8 shadow-md border border-gray-100"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Research & Analysis</h3>
             <p className="text-gray-600 leading-relaxed">
@@ -108,7 +108,7 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-center"
+            className="text-center bg-white rounded-2xl p-8 shadow-md border border-gray-100"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Development & Automation</h3>
             <p className="text-gray-600 leading-relaxed">
@@ -121,7 +121,7 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="text-center"
+            className="text-center bg-white rounded-2xl p-8 shadow-md border border-gray-100"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Content & Media</h3>
             <p className="text-gray-600 leading-relaxed">
@@ -139,7 +139,7 @@ const Features = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="bg-white rounded-2xl p-8 group transition-all duration-300 webflow-shadow-lg smooth-hover border border-gray-200"
+              className="bg-white rounded-2xl p-8 group transition-all duration-300 shadow-lg smooth-hover border border-gray-200"
             >
               <div className={`w-12 h-12 ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300`}>
                 <feature.icon className="w-6 h-6 text-gray-700" />

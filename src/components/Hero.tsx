@@ -35,7 +35,7 @@ const Hero = ({ onStartChat }: HeroProps) => {
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(34, 34, 34, 0.15)" }}
             whileTap={{ scale: 0.95 }}
             onClick={onStartChat}
-            className="group bg-gray-900 text-white px-4 py-2 rounded-xl font-medium text-sm flex items-center space-x-1 glow-effect transition-all duration-300 webflow-shadow-lg smooth-hover"
+            className="group bg-gray-900 text-white px-4 py-2 rounded-xl font-medium text-sm flex items-center space-x-1 glow-effect transition-all duration-300 shadow-lg smooth-hover"
           >
             <span>Start Conversation</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -44,7 +44,7 @@ const Hero = ({ onStartChat }: HeroProps) => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white border border-gray-200 text-gray-900 px-4 py-2 rounded-xl font-medium text-sm hover:bg-gray-50 transition-all duration-300 webflow-shadow smooth-hover"
+            className="bg-white border border-gray-200 text-gray-900 px-4 py-2 rounded-xl font-medium text-sm hover:bg-gray-50 transition-all duration-300 shadow-md smooth-hover"
           >
             View Documentation
           </motion.button>
@@ -65,7 +65,7 @@ const Hero = ({ onStartChat }: HeroProps) => {
               key={index}
               whileHover={{ y: -5, scale: 1.02 }}
               className="bg-white rounded-2xl p-8 group hover:glow-effect transition-all duration-300 webflow-shadow smooth-hover border border-gray-200"
-              className="bg-white rounded-2xl p-8 group transition-all duration-300 webflow-shadow smooth-hover border border-gray-200"
+              className="bg-white rounded-2xl p-8 group transition-all duration-300 shadow-lg smooth-hover border border-gray-200"
             >
               <div className={`w-12 h-12 ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300`}>
                 <feature.icon className="w-6 h-6 text-gray-700" />

@@ -58,7 +58,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-white rounded-xl text-gray-600 hover:text-gray-900 transition-colors webflow-shadow border border-gray-200"
+                  className="p-3 bg-white rounded-xl text-gray-600 hover:text-gray-900 transition-colors shadow-md border border-gray-200"
                 >
                   <social.icon className="w-5 h-5" />
                 </motion.a>
