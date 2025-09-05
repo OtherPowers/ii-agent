@@ -18,7 +18,6 @@ const Hero = ({ onStartChat }: HeroProps) => {
         >
           <div className="inline-flex items-center space-x-2 bg-gray-100 rounded-full px-4 py-2 mb-6 webflow-shadow">
             <Sparkles className="w-4 h-4 text-gray-700" />
-            <span className="text-gray-700 text-sm">Powered by Advanced AI and Humans who believe in less awful futures (together)</span>
           </div>
           
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
