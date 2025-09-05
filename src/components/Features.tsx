@@ -83,11 +83,52 @@ const Features = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Comprehensive <span className="gradient-text">Capabilities</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto text-balance">
             II-Agent excels across multiple domains, providing intelligent assistance 
             for complex tasks that require reasoning, creativity, and technical expertise.
           </p>
         </motion.div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Research & Analysis</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Deep web research, fact-checking, and comprehensive data analysis with multi-source verification and structured reporting.
+            </p>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Development & Automation</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Full-stack development, code generation, debugging, testing, and workflow automation across multiple programming languages.
+            </p>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Content & Media</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Technical documentation, multimedia content creation, presentations, and AI-powered media generation with professional quality.
+            </p>
+          </motion.div>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
