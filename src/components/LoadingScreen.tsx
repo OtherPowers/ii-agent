@@ -17,83 +17,104 @@ const LoadingScreen = () => {
           className="mb-8"
         >
           <div className="w-32 h-32 mx-auto mb-6 relative">
-            {/* Holographic swirling marble */}
+            {/* Oil-in-water holographic lava lamp */}
             <motion.div
-              animate={{ 
-                rotate: 360,
-                scale: [1, 1.1, 1],
+              className="w-full h-full relative overflow-hidden rounded-full"
+              style={{
+                background: 'radial-gradient(circle at 30% 20%, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)',
+                filter: 'blur(1px) contrast(1.2) saturate(1.3)'
               }}
-              transition={{ 
-                rotate: { duration: 3, repeat: Infinity, ease: "linear" },
-                scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-              }}
-              className="w-full h-full relative"
             >
-              {/* Outer holographic ring */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 opacity-80 blur-sm"></div>
+              {/* Floating oil blobs */}
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  animate={{
+                    x: [
+                      Math.cos(i * 45 * Math.PI / 180) * 20,
+                      Math.cos((i * 45 + 180) * Math.PI / 180) * 25,
+                      Math.cos(i * 45 * Math.PI / 180) * 20
+                    ],
+                    y: [
+                      Math.sin(i * 45 * Math.PI / 180) * 20,
+                      Math.sin((i * 45 + 180) * Math.PI / 180) * 25,
+                      Math.sin(i * 45 * Math.PI / 180) * 20
+                    ],
+                    scale: [0.8, 1.2, 0.8],
+                    opacity: [0.6, 0.9, 0.6]
+                  }}
+                  transition={{
+                    duration: 4 + i * 0.3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.2
+                  }}
+                  className="absolute top-1/2 left-1/2 rounded-full transform -translate-x-1/2 -translate-y-1/2"
+                  style={{
+                    width: `${12 + i * 2}px`,
+                    height: `${12 + i * 2}px`,
+                    background: `radial-gradient(circle, hsla(${i * 45 + 200}, 80%, 70%, 0.8) 0%, hsla(${i * 45 + 280}, 70%, 60%, 0.4) 100%)`,
+                    filter: 'blur(0.5px)'
+                  }}
+                />
+              ))}
               
-              {/* Middle swirling layer */}
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-2 rounded-full bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-500 opacity-70"
-              ></motion.div>
-              
-              {/* Inner marble core */}
+              {/* Swirling background gradient */}
               <motion.div
                 animate={{ 
                   rotate: 360,
                   background: [
-                    "linear-gradient(45deg, #667eea 0%, #764ba2 100%)",
-                    "linear-gradient(45deg, #f093fb 0%, #f5576c 100%)",
-                    "linear-gradient(45deg, #4facfe 0%, #00f2fe 100%)",
-                    "linear-gradient(45deg, #667eea 0%, #764ba2 100%)"
+                    'conic-gradient(from 0deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #667eea)',
+                    'conic-gradient(from 120deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #667eea)',
+                    'conic-gradient(from 240deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #667eea)',
+                    'conic-gradient(from 360deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #667eea)'
                   ]
                 }}
                 transition={{ 
-                  rotate: { duration: 2.5, repeat: Infinity, ease: "linear" },
+                  rotate: { duration: 8, repeat: Infinity, ease: "linear" },
                   background: { duration: 6, repeat: Infinity, ease: "easeInOut" }
                 }}
-                className="absolute inset-4 rounded-full flex items-center justify-center shadow-2xl"
+                className="absolute inset-0 rounded-full opacity-60"
+                style={{ filter: 'blur(2px)' }}
+              />
+              
+              {/* Central holographic core */}
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.05, 1],
+                  filter: [
+                    'hue-rotate(0deg) saturate(1.2)',
+                    'hue-rotate(60deg) saturate(1.4)',
+                    'hue-rotate(120deg) saturate(1.2)',
+                    'hue-rotate(0deg) saturate(1.2)'
+                  ]
+                }}
+                transition={{ 
+                  scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                  filter: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="absolute inset-6 rounded-full flex items-center justify-center"
+                style={{
+                  background: 'radial-gradient(circle at 40% 30%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 30%, transparent 70%)',
+                  backdropFilter: 'blur(1px)',
+                  border: '1px solid rgba(255,255,255,0.2)'
+                }}
               >
                 <motion.span 
                   animate={{ 
-                    color: ["#ffffff", "#f0f9ff", "#e0f2fe", "#ffffff"],
+                    color: ["#ffffff", "#e0f2fe", "#f0f9ff", "#ffffff"],
                     textShadow: [
-                      "0 0 10px rgba(255,255,255,0.5)",
-                      "0 0 20px rgba(59,130,246,0.8)",
-                      "0 0 10px rgba(255,255,255,0.5)"
+                      "0 0 8px rgba(255,255,255,0.8)",
+                      "0 0 12px rgba(102,126,234,0.6)",
+                      "0 0 8px rgba(255,255,255,0.8)"
                     ]
                   }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-white font-bold text-2xl"
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-white font-bold text-xl tracking-wider"
                 >
                   II
                 </motion.span>
               </motion.div>
-              
-              {/* Floating particles */}
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  animate={{
-                    x: [0, Math.cos(i * 60 * Math.PI / 180) * 40, 0],
-                    y: [0, Math.sin(i * 60 * Math.PI / 180) * 40, 0],
-                    opacity: [0.3, 0.8, 0.3],
-                    scale: [0.5, 1, 0.5]
-                  }}
-                  transition={{
-                    duration: 3 + i * 0.2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.3
-                  }}
-                  className="absolute top-1/2 left-1/2 w-2 h-2 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"
-                  style={{
-                    background: `linear-gradient(45deg, hsl(${i * 60}, 70%, 60%), hsl(${(i * 60 + 120) % 360}, 70%, 60%))`
-                  }}
-                />
-              ))}
             </motion.div>
           </div>
           
