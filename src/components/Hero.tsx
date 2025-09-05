@@ -22,7 +22,7 @@ const Hero = ({ onStartChat }: HeroProps) => {
           </div>
           
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-gray-900" style={{ fontSize: 'calc(1em - 4px)' }}>Intelligent Internet Platform</span>
+            <span className="text-gray-900" style={{ fontSize: 'calc(0.7em - 4px)' }}>Intelligent Internet Platform</span>
           </h1>
           
           <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8 text-balance">
@@ -41,16 +41,16 @@ const Hero = ({ onStartChat }: HeroProps) => {
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(34, 34, 34, 0.15)" }}
             whileTap={{ scale: 0.95 }}
             onClick={onStartChat}
-            className="group bg-gray-900 text-white px-8 py-4 rounded-2xl font-semibold text-lg flex items-center space-x-2 glow-effect transition-all duration-300 webflow-shadow-lg smooth-hover"
+            className="group bg-gray-900 text-white px-4 py-2 rounded-xl font-medium text-sm flex items-center space-x-1 glow-effect transition-all duration-300 webflow-shadow-lg smooth-hover"
           >
             <span>Start Conversation</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </motion.button>
           
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white border border-gray-200 text-gray-900 px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-gray-50 transition-all duration-300 webflow-shadow smooth-hover"
+            className="bg-white border border-gray-200 text-gray-900 px-4 py-2 rounded-xl font-medium text-sm hover:bg-gray-50 transition-all duration-300 webflow-shadow smooth-hover"
           >
             View Documentation
           </motion.button>
