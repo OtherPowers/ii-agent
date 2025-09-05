@@ -32,19 +32,17 @@ const Hero = ({ onStartChat }: HeroProps) => {
           className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16"
         >
           <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(34, 34, 34, 0.15)" }}
             whileTap={{ scale: 0.95 }}
             onClick={onStartChat}
-            className="group bg-gray-900 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center space-x-1 glow-effect transition-all duration-300 shadow-lg smooth-hover"
+            className="group shimmer-button shimmer-button-dark bg-gray-900 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center space-x-1 transition-all duration-300 shadow-lg"
           >
             <span>Start Conversation</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </motion.button>
           
           <motion.button
-            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white border border-gray-200 text-gray-900 px-4 py-2 rounded-lg font-medium text-sm hover:bg-gray-50 transition-all duration-300 shadow-md smooth-hover"
+            className="shimmer-button bg-white border border-gray-200 text-gray-900 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 shadow-md"
           >
             View Documentation
           </motion.button>
@@ -57,17 +55,17 @@ const Hero = ({ onStartChat }: HeroProps) => {
           className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
         >
           {[
-            { icon: Brain, title: "Advanced Reasoning", desc: "Multi-step problem solving with Claude Sonnet 4", color: "bg-blue-100" },
-            { icon: Zap, title: "Real-time Execution", desc: "Live code execution and web interaction", color: "bg-green-100" },
-            { icon: Sparkles, title: "Multi-modal", desc: "Text, images, audio, and video processing", color: "bg-purple-100" }
+            { icon: Brain, title: "Advanced Reasoning", desc: "Multi-step problem solving with Claude Sonnet 4" },
+            { icon: Zap, title: "Real-time Execution", desc: "Live code execution and web interaction" },
+            { icon: Sparkles, title: "Multi-modal", desc: "Text, images, audio, and video processing" }
           ].map((feature, index) => (
             <motion.div
               key={index}
               whileHover={{ y: -5, scale: 1.02 }}
-              className="bg-white rounded-2xl p-8 group hover:glow-effect transition-all duration-300 webflow-shadow smooth-hover border border-gray-200"
-              className="bg-white rounded-2xl p-8 group transition-all duration-300 shadow-lg smooth-hover border border-gray-200"
+              whileHover={{ y: -5 }}
+              className="bg-white rounded-2xl p-8 group transition-all duration-300 shadow-lg border border-gray-200"
             >
-              <div className={`w-12 h-12 ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300`}>
+              <div className="flex items-center justify-center mb-6">
                 <feature.icon className="w-6 h-6 text-gray-700" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4 transition-all duration-300">{feature.title}</h3>

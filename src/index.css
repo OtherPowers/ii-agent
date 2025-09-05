@@ -205,6 +205,46 @@
     90% { transform: translate3D(3%, 79%, 0) rotate(324deg); }
     100% { transform: translate3D(0%, 51%, 0) rotate(360deg); }
   }
+
+  .shimmer-button {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 70%
+    );
+    transition: left 0.6s ease-in-out;
+    z-index: 1;
+  }
+
+  .shimmer-button:hover::before {
+    left: 100%;
+  }
+
+  .shimmer-button-dark::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 70%
+    );
+  }
+
+  .shimmer-button > * {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 @layer utilities {
