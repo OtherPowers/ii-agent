@@ -91,17 +91,27 @@ const LoadingScreen = () => {
                           "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z"
                         ]
                       }}
-                </g>
-                <g className="blob blob-2 alt">
-                  <path />
-                </g>
-                <g className="blob blob-3 alt">
-                  <path />
-                </g>
-                <g className="blob blob-4 alt">
-                  <path />
-                </g>
-              </svg>
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 3
+                      }}
+                      fill="#ff6b6b"
+                      style={{ filter: 'blur(0.25rem)', opacity: 0.7, transform: 'scale(0.74)' }}
+                    />
+                  </g>
+                  <g className="blob blob-2 alt">
+                    <path />
+                  </g>
+                  <g className="blob blob-3 alt">
+                    <path />
+                  </g>
+                  <g className="blob blob-4 alt">
+                    <path />
+                  </g>
+                </svg>
+              </div>
             </div>
           </div>
           
@@ -118,7 +128,6 @@ const LoadingScreen = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="text-white/70 text-lg"
             className="text-gray-600 text-lg"
           >
             Initializing Intelligent Assistant...
