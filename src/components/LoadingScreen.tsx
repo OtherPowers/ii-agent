@@ -16,15 +16,85 @@ const LoadingScreen = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-8"
         >
-          <div className="w-24 h-24 mx-auto mb-6 relative">
+          <div className="w-32 h-32 mx-auto mb-6 relative">
+            {/* Holographic swirling marble */}
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-full h-full border-4 border-gray-200 border-t-gray-900 rounded-full"
-            />
-            <div className="absolute inset-2 bg-white rounded-full flex items-center justify-center border border-gray-200">
-              <span className="text-gray-500 font-bold text-xl">II</span>
-            </div>
+              animate={{ 
+                rotate: 360,
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ 
+                rotate: { duration: 3, repeat: Infinity, ease: "linear" },
+                scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+              }}
+              className="w-full h-full relative"
+            >
+              {/* Outer holographic ring */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 opacity-80 blur-sm"></div>
+              
+              {/* Middle swirling layer */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-2 rounded-full bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-500 opacity-70"
+              ></motion.div>
+              
+              {/* Inner marble core */}
+              <motion.div
+                animate={{ 
+                  rotate: 360,
+                  background: [
+                    "linear-gradient(45deg, #667eea 0%, #764ba2 100%)",
+                    "linear-gradient(45deg, #f093fb 0%, #f5576c 100%)",
+                    "linear-gradient(45deg, #4facfe 0%, #00f2fe 100%)",
+                    "linear-gradient(45deg, #667eea 0%, #764ba2 100%)"
+                  ]
+                }}
+                transition={{ 
+                  rotate: { duration: 2.5, repeat: Infinity, ease: "linear" },
+                  background: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="absolute inset-4 rounded-full flex items-center justify-center shadow-2xl"
+              >
+                <motion.span 
+                  animate={{ 
+                    color: ["#ffffff", "#f0f9ff", "#e0f2fe", "#ffffff"],
+                    textShadow: [
+                      "0 0 10px rgba(255,255,255,0.5)",
+                      "0 0 20px rgba(59,130,246,0.8)",
+                      "0 0 10px rgba(255,255,255,0.5)"
+                    ]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-white font-bold text-2xl"
+                >
+                  II
+                </motion.span>
+              </motion.div>
+              
+              {/* Floating particles */}
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  animate={{
+                    x: [0, Math.cos(i * 60 * Math.PI / 180) * 40, 0],
+                    y: [0, Math.sin(i * 60 * Math.PI / 180) * 40, 0],
+                    opacity: [0.3, 0.8, 0.3],
+                    scale: [0.5, 1, 0.5]
+                  }}
+                  transition={{
+                    duration: 3 + i * 0.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.3
+                  }}
+                  className="absolute top-1/2 left-1/2 w-2 h-2 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"
+                  style={{
+                    background: `linear-gradient(45deg, hsl(${i * 60}, 70%, 60%), hsl(${(i * 60 + 120) % 360}, 70%, 60%))`
+                  }}
+                />
+              ))}
+            </motion.div>
           </div>
           
           <motion.h1
