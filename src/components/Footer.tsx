@@ -18,10 +18,7 @@ const Footer = () => {
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-gray-200">
                 <span className="text-gray-500 font-bold text-lg">II</span>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">II-Agent</h3>
-                <p className="text-gray-600 text-sm">Intelligent Internet Platform</p>
-              </div>
+              <h3 className="text-xl font-bold text-gray-900">II-Agent</h3>
             </div>
             <p className="text-gray-600 leading-relaxed max-w-md">
               Open-source intelligent assistant designed to streamline and enhance workflows 
