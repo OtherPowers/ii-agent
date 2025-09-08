@@ -91,6 +91,22 @@ const LoadingScreen = () => {
                           "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z"
                         ]
                       }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 3
+                      }}
+                      fill="#f39c12"
+                      style={{ filter: 'blur(0.25rem)', opacity: 0.7, transform: 'scale(0.74)' }}
+                    />
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          <motion.h1
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
