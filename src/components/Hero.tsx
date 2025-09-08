@@ -1,81 +1,130 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles, Zap, Brain } from 'lucide-react'
 
-interface HeroProps {
-  onStartChat: () => void
-}
-
-const Hero = ({ onStartChat }: HeroProps) => {
+const LoadingScreen = () => {
   return (
-    <section className="pt-32 pb-20 px-6">
-      <div className="container-custom text-center">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-white flex items-center justify-center z-50"
+    >
+      <div className="text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-8"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-          </h1>
-          
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8 text-balance">
-            Experience the future of AI assistance with II-Agent. From research and content creation 
-            to software development and workflow automation—all powered by cutting-edge language models.
-          </p>
+          <div className="w-32 h-32 mx-auto mb-6 relative overflow-hidden rounded-full">
+            {/* Oil-in-water holographic lava lamp container */}
+            <div className="lava-lamp-container">
+              <div className="lava-lamp-blobs">
+                <svg viewBox="0 0 1200 1200" className="w-full h-full">
+                  {/* Main blobs */}
+                  <g className="blob blob-1">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      fill="#984ddf"
+                      style={{ filter: 'blur(1rem)', opacity: 0.7 }}
+                    />
+                  </g>
+                  <g className="blob blob-2">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 7,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1
+                      }}
+                      fill="#4344ad"
+                      style={{ filter: 'blur(0.75rem)', opacity: 0.7, transform: 'scale(0.78)' }}
+                    />
+                  </g>
+                  <g className="blob blob-3">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 2
+                      }}
+                      fill="#74d9e1"
+                      style={{ filter: 'blur(0.5rem)', opacity: 0.7, transform: 'scale(0.76)' }}
+                    />
+                  </g>
+                  <g className="blob blob-4">
+                    <motion.path
+                      animate={{
+                        d: [
+                          "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z",
+                          "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z",
+                          "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z",
+                          "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z"
+                        ]
+                      }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="text-white/70 text-lg"
+            className="text-gray-600 text-lg"
+          >
+            Initializing Intelligent Assistant...
+          </motion.p>
         </motion.div>
         
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          className="flex justify-center space-x-2"
         >
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={onStartChat}
-            className="group shimmer-button shimmer-button-dark bg-gray-900 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center space-x-1 transition-all duration-300 shadow-lg"
-          >
-            <span>Start Conversation</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
-          
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            className="shimmer-button bg-white border border-gray-200 text-gray-900 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 shadow-md"
-          >
-            View Documentation
-          </motion.button>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-        >
-          {[
-            { icon: Brain, title: "Advanced Reasoning", desc: "Multi-step problem solving with Claude Sonnet 4" },
-            { icon: Zap, title: "Real-time Execution", desc: "Live code execution and web interaction" },
-            { icon: Sparkles, title: "Multi-modal", desc: "Text, images, audio, and video processing" }
-          ].map((feature, index) => (
+          {[0, 1, 2].map((i) => (
             <motion.div
-              key={index}
-              whileHover={{ y: -5, scale: 1.02 }}
-              whileHover={{ y: -5 }}
-              className="bg-white rounded-2xl p-8 group transition-all duration-300 shadow-lg border border-gray-200"
-            >
-              <div className="flex items-center justify-center mb-6">
-                <feature.icon className="w-6 h-6 text-gray-700" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4 transition-all duration-300">{feature.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
-            </motion.div>
+              key={i}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+              className="w-3 h-3 bg-gray-900 rounded-full"
+            />
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.div>
   )
 }
 
-export default Hero
+export default LoadingScreen
