@@ -34,7 +34,7 @@ II-Agent Chat also feature within II-Agent that lets you work across multiple mo
 
 ## SWE-Bench Pro
 
-<img width="1778" height="1060" alt="swepro" src="https://github.com/user-attachments/assets/d4eb2c1f-abfe-426f-b3ac-c35e1703768b" />
+<img width="1778" height="1060" alt="swepro" src="https://github.com/user-attachments/assets/e955538d-986a-4c74-96b9-dbeb56e803e1" />
 
 
 
