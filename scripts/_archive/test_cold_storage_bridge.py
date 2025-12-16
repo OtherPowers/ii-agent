@@ -1,0 +1,95 @@
+# /Users/bush3000/ii-agent-reorg/scripts/run_cold_storage_bridge_once.py
+"""
+Cold storage → governance signal → posture accumulator (one-shot runner)
+
+Purpose:
+- Prove the full influence spine works end-to-end:
+  cold summary → signal emission → accumulator → posture snapshot
+
+This script is intentionally boring.
+No loops. No schedulers. No persistence.
+It exists to validate correctness, not scale.
+"""
+
+from __future__ import annotations
+
+import time
+
+from otherpowers_governance.intelligence.memory.bridge.cold_storage_bridge import (
+    ColdStorageBridgeConfig,
+    LongHorizonSummary,
+    emit_cold_storage_governance_signals,
+)
+
+from otherpowers_governance.signals.accumulator import OtherPowers_PostureAccumulator
+
+
+def _ts(hours_ago: float) -> float:
+    return time.time() - (hours_ago * 3600.0)
+
+
+def main() -> None:
+    # -----------------------------
+    # 1. Create long-horizon summaries
+    # -----------------------------
+    # These are already privacy-preserving.
+    # No events. No identities. No topics.
+    summaries = [
+        LongHorizonSummary(
+            window_start_ts=_ts(72),
+            window_end_ts=_ts(36),
+            pressure_index=0.76,
+            capture_index=0.73,
+            volatility_index=0.41,
+            plurality_index=0.52,
+            fragility_index=0.44,
+            silence_index=0.18,
+        ),
+        LongHorizonSummary(
+            window_start_ts=_ts(36),
+            window_end_ts=_ts(0),
+            pressure_index=0.79,
+            capture_index=0.78,
+            volatility_index=0.45,
+            plurality_index=0.49,
+            fragility_index=0.46,
+            silence_index=0.16,
+        ),
+    ]
+
+    # -----------------------------
+    # 2. Emit governance signals
+    # -----------------------------
+    bridge_config = ColdStorageBridgeConfig(
+        emit_threshold=0.45,
+        uncertainty_bias=0.08,
+    )
+
+    signals = emit_cold_storage_governance_signals(
+        summaries,
+        config=bridge_config,
+    )
+
+    if not signals:
+        print("Cold storage bridge chose silence (selective deafness).")
+        return
+
+    print(f"Emitted {len(signals)} governance signal(s).")
+
+    # -----------------------------
+    # 3. Feed into posture accumulator
+    # -----------------------------
+    accumulator = OtherPowers_PostureAccumulator()
+
+    for signal in signals:
+        accumulator.accept(signal)
+
+    posture = accumulator.resolve_posture()
+
+    # Snapshot side-effect already occurs inside resolve_posture()
+    print("Resolved posture:", posture)
+
+
+if __name__ == "__main__":
+    main()
+

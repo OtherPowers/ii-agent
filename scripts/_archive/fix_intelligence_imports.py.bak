@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+"""
+Ultra-safe import migration for OtherPowers ii-agent.
+
+- Rewrites only known intelligence import paths
+- Skips pycache, binaries, venvs, node_modules, infra junk
+- Skips non-UTF8 files safely
+- Creates .bak backups for every modified file
+"""
+
+from pathlib import Path
+import shutil
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+SKIP_DIRS = {
+    "__pycache__",
+    ".git",
+    ".venv",
+    "venv",
+    "node_modules",
+    "dist",
+    "build",
+    ".mypy_cache",
+    ".pytest_cache",
+}
+
+IMPORT_MAP = {
+    "otherpowers_governance.intelligence.ethical_fields":
+        "otherpowers_governance.intelligence.core.ethical_fields",
+
+    "otherpowers_governance.intelligence.otherpowers_intelligence_core":
+        "otherpowers_governance.intelligence.core.otherpowers_intelligence_core",
+
+    "otherpowers_governance.intelligence.intent_gate":
+        "otherpowers_governance.intelligence.activation.intent_gate",
+
+    "otherpowers_governance.intelligence.dao_signal":
+        "otherpowers_governance.intelligence.activation.dao_signal",
+
+    "otherpowers_governance.intelligence.summarizer":
+        "otherpowers_governance.intelligence.interpretation.summarizer",
+
+    "otherpowers_governance.intelligence.cold_storage.summarizer":
+        "otherpowers_governance.intelligence.interpretation.summarizer",
+
+    "otherpowers_governance.intelligence.cold_storage.horizon_buffer":
+        "otherpowers_governance.intelligence.memory.horizon_buffer",
+
+    "otherpowers_governance.intelligence.memory_sphere":
+        "otherpowers_governance.intelligence.memory.memory_sphere",
+
+    "otherpowers_governance.intelligence.cold_storage.emission_gate":
+        "otherpowers_governance.intelligence.memory.bridge.emission_gate",
+
+    "otherpowers_governance.intelligence.cold_storage_bridge":
+        "otherpowers_governance.intelligence.memory.bridge.cold_storage_bridge",
+
+    "otherpowers_governance.intelligence.failure_monitor":
+        "otherpowers_governance.intelligence.safety.failure_monitor",
+
+    "otherpowers_governance.intelligence.loader":
+        "otherpowers_governance.intelligence.orchestration.loader",
+}
+
+
+def should_skip(path: Path) -> bool:
+    return any(part in SKIP_DIRS for part in path.parts)
+
+
+def process_file(path: Path) -> bool:
+    try:
+        text = path.read_text(encoding="utf-8")
+    except Exception:
+        return False
+
+    updated = text
+    for old, new in IMPORT_MAP.items():
+        updated = updated.replace(old, new)
+
+    if updated != text:
+        backup = path.with_suffix(path.suffix + ".bak")
+        if not backup.exists():
+            shutil.copy2(path, backup)
+        path.write_text(updated, encoding="utf-8")
+        print(f"Updated imports in: {path.relative_to(REPO_ROOT)}")
+        return True
+
+    return False
+
+
+def main():
+    changed = 0
+
+    for py_file in REPO_ROOT.rglob("*.py"):
+        if should_skip(py_file):
+            continue
+        if py_file.suffix == ".bak":
+            continue
+        if process_file(py_file):
+            changed += 1
+
+    print(f"\nDone. Files updated: {changed}")
+    print("Backups saved as *.bak alongside modified files.")
+
+
+if __name__ == "__main__":
+    main()
+
