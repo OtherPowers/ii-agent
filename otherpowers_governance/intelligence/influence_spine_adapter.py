@@ -1,92 +1,78 @@
-import os
-from typing import Mapping, Optional
+from __future__ import annotations
 
-from otherpowers_governance.intelligence.cold_storage_bridge import (
-    ColdStoragePostureEmissionBridge,
-)
-from otherpowers_governance.intelligence.otherpowers_mycelial_field import (
-    otherpowers_Mycelial_field,
-)
-from otherpowers_governance.signals.field_balancer import FieldBalancer
-from otherpowers_governance.signals.posture_field_state import (
-    write_field_state,
-    write_otherpowers_spore_field_state,
-)
-from otherpowers_governance.signals.silence_field import (
-    register_silence,
-    read_silence_field,
-)
-
-DEFAULT_FIELD_STATE_PATH = "/tmp/otherpowers_posture.field_state"
-ENV_FIELD_STATE_PATH = "OTHERPOWERS_POSTURE_FIELD_STATE"
-
-DEFAULT_SPORE_FIELD_STATE_PATH = "/tmp/otherpowers_spore.field_state"
-ENV_SPORE_FIELD_STATE_PATH = "OTHERPOWERS_SPORE_FIELD_STATE"
+from typing import Any, Optional, Callable
 
 
 class InfluenceSpineAdapter:
-    def __init__(self):
-        self._bridge = ColdStoragePostureEmissionBridge()
-        self._field = FieldBalancer()
+    """
+    Mediates between an influence spine and governance / cold storage.
 
-    def process(
+    Accepts spines that are:
+    - callable(context) -> Optional[signal]
+    - or objects exposing .process(context)
+    """
+
+    def __init__(
         self,
-        summary: Mapping[str, object],
-        field_state_path: Optional[str] = None,
-        spore_field_state_path: Optional[str] = None,
+        spine: Optional[Any] = None,
+        cold_storage: Optional[Any] = None,
     ):
-        signal = self._bridge.emit(summary)
+        self._spine = spine
+        self._cold_storage = cold_storage
+        self._bridge = None
 
-        spore_out = (
-            spore_field_state_path
-            or os.environ.get(ENV_SPORE_FIELD_STATE_PATH)
-            or DEFAULT_SPORE_FIELD_STATE_PATH
-        )
-
-        if signal is None:
-            register_silence(
-                {
-                    "density": {
-                        "observed": "thick",
-                        "counterfactual": "thin diffusion would amplify harm",
-                    },
-                    "directionality": {
-                        "observed": "multi-directional",
-                        "counterfactual": "single-axis response would collapse plurality",
-                    },
-                }
-            )
-
-            if os.environ.get(ENV_SPORE_FIELD_STATE_PATH) or spore_field_state_path:
-                silence_state = read_silence_field(decay=False).get("silence", {})
-                write_otherpowers_spore_field_state(
-                    spore_out,
-                    silence=silence_state if isinstance(silence_state, dict) else None,
+    def _get_bridge(self):
+        if self._bridge is None:
+            if self._cold_storage is None:
+                from otherpowers_governance.intelligence.cold_storage_bridge import (
+                    ColdStoragePostureEmissionBridge,
                 )
 
+                self._bridge = ColdStoragePostureEmissionBridge()
+            else:
+                self._bridge = self._cold_storage
+
+        return self._bridge
+
+    def _invoke_spine(self, context: dict) -> Optional[Any]:
+        """
+        Invoke the spine in a shape-agnostic way.
+        """
+
+        spine = self._spine
+
+        if spine is None:
             return None
 
-        aggregated = self._field.balance(signal)
+        # Preferred: callable spine
+        if callable(spine):
+            return spine(context)
 
-        field = otherpowers_Mycelial_field(summary.get("pattern_families", []))
+        # Fallback: object with process()
+        process = getattr(spine, "process", None)
+        if callable(process):
+            return process(context)
 
-        trunk_out = (
-            field_state_path
-            or os.environ.get(ENV_FIELD_STATE_PATH)
-            or DEFAULT_FIELD_STATE_PATH
-        )
+        # Unknown spine shape → silence
+        return None
 
-        write_field_state(
-            trunk_out,
-            core=aggregated,
-            field=field if field else None,
-        )
+    def process(self, context: dict) -> Optional[Any]:
+        """
+        Process context through the influence spine.
 
-        if os.environ.get(ENV_SPORE_FIELD_STATE_PATH) or spore_field_state_path:
-            write_otherpowers_spore_field_state(
-                spore_out,
-                field=field if field else None,
-            )
+        Returns None when:
+        - no spine
+        - spine yields silence
+        - governance refuses emission
+        """
 
-        return aggregated
+        result = self._invoke_spine(context)
+
+        if result is None:
+            return None
+
+        bridge = self._get_bridge()
+        emitted = bridge.emit(result)
+
+        return emitted
 

@@ -1,13 +1,79 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[project]
-name = "otherpowers-ii-agent"
-version = "0.1.0"
-description = "Local-first, non-coercive intelligence attunement layer"
-requires-python = ">=3.10"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["otherpowers_governance*", "field_attunement*"]
+[project]
+name = "otherpowers-governance"
+version = "0.1.0"
+description = "Creative intelligence governance primitives focused on harm reduction, plurality, and long-horizon stewardship."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+
+authors = [
+  { name = "Katie Bush", email = "k@ladypowers.co" }
+]
+
+keywords = [
+  "creative-intelligence",
+  "harm-reduction",
+  "ai-governance",
+  "plural-sentience",
+  "non-coercive-systems",
+  "otherpowers"
+]
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Libraries"
+]
+
+
+[project.urls]
+Homepage = "https://otherpowers.co"
+Repository = "https://github.com/otherpowers/ii-agent"
+Documentation = "https://otherpowers.co"
+
+
+[tool.setuptools]
+packages = ["otherpowers_governance"]
+
+
+[tool.pytest.ini_options]
+testpaths = ["scripts"]
+python_files = ["test_*.py"]
+norecursedirs = [
+    "scripts/_archive",
+    ".git",
+    ".venv",
+    "node_modules",
+    "dist",
+]
+addopts = "-q"
+
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+skip-string-normalization = true
+
+
+[tool.isort]
+profile = "black"
+known_first_party = ["otherpowers_governance"]
+line_length = 88
+
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true

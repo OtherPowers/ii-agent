@@ -1,21 +1,44 @@
 """
 Public Signals API.
 
-Attunement-only boundary.
-No consumers. No observers.
+This module is the ONLY supported construction surface
+for governance-safe signals.
 """
 
-from .FieldSignalAttunement import (
-    attune_field,
-    attune_spore,
-    read_silence_field,
-    silence_location,
+from typing import Mapping
+
+from otherpowers_governance.signals.schema import (
+    Posture,
+    Uncertainty,
+    IntelligenceMode,
+    WithholdReason,
 )
 
-from .field_balancer import FieldBalancer
+
+def new_signal(
+    *,
+    posture: Posture,
+    uncertainty: Uncertainty,
+    mode: IntelligenceMode,
+    withhold: WithholdReason,
+) -> Mapping:
+    """
+    Canonical constructor for governance signals.
+
+    Returns a plain mapping to preserve:
+    - serialization safety
+    - testability
+    - non-coercive boundaries
+    """
+    return {
+        "posture": posture.value,
+        "uncertainty": uncertainty.value,
+        "mode": mode.value,
+        "withhold": withhold.value,
+    }
 
 
-# Normie-safe alias (explicit, intentional)
-def sense_silence(*, decay: bool = True):
-    return read_silence_field(decay=decay)
+__all__ = [
+    "new_signal",
+]
 

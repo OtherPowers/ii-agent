@@ -1,20 +1,11 @@
 """
-OtherPowers ii-agent
+OtherPowers Governance package.
 
 Local-first, non-coercive intelligence attunement layer.
+
+This package intentionally avoids eager imports or runtime wiring.
+Concrete implementations must be imported explicitly at point of use.
 """
 
-from .signals.api import (
-    attune_field,
-    attune_spore,
-    sense_silence,
-    FieldBalancer,
-)
-
-__all__ = [
-    "attune_field",
-    "attune_spore",
-    "sense_silence",
-    "FieldBalancer",
-]
+__all__ = []
 

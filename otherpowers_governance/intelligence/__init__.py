@@ -1,3 +1,9 @@
-from .cold_storage_bridge import ColdStoragePostureEmissionBridge
-from .influence_spine_adapter import InfluenceSpineAdapter
+"""
+Intelligence package.
+
+Do NOT eagerly import infrastructure or side-effectful components here.
+Import concrete implementations at point of use.
+"""
+
+__all__ = []
 

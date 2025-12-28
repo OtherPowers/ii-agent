@@ -6,42 +6,35 @@ from otherpowers_governance.signals.schema import (
     IntelligenceMode,
     WithholdReason,
 )
-from otherpowers_governance.signals.otherpowers_governance_signal import new_signal
+
+# IMPORTANT:
+# new_signal is sourced from the canonical signals API,
+# not from a legacy or phantom module.
+from otherpowers_governance.signals.api import new_signal
 
 
 class ColdStoragePostureEmissionBridge:
     """
-    Translates long-horizon summaries into governance signals.
-    Silence (None) is a first-class outcome.
+    Translates posture summaries into governance-safe emission records.
+
+    This bridge may return None to indicate:
+    - silence
+    - governance refusal
+    - intentional non-emission
     """
 
-    def emit(self, summary: Mapping[str, object]):
-        patterns = summary.get("pattern_families")
-        if not patterns:
+    def emit(self, summary: Mapping) -> Mapping | None:
+        if not summary:
             return None
 
-        pset = set(str(p) for p in patterns)
-
-        # ------------------------------
-        # VOLATILITY → SILENCE
-        # ------------------------------
-        if "volatility" in pset:
+        posture = summary.get("posture")
+        if posture is None:
             return None
 
-        if "care" in pset:
-            return new_signal(
-                posture=Posture.INCREASE_CARE,
-                uncertainty=Uncertainty.HIGH,
-                intelligence_mode=IntelligenceMode.LEARNING,
-            )
-
-        if "pressure" in pset or "capture" in pset:
-            return new_signal(
-                posture=Posture.HIGH_CARE,
-                uncertainty=Uncertainty.HIGH,
-                intelligence_mode=IntelligenceMode.OBSERVATIONAL,
-            )
-
-        # default: insufficient signal → silence
-        return None
+        return new_signal(
+            posture=Posture(posture),
+            uncertainty=Uncertainty.UNKNOWN,
+            mode=IntelligenceMode.REFLECTIVE,
+            withhold=WithholdReason.NONE,
+        )
 
