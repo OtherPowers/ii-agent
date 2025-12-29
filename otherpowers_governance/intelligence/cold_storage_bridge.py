@@ -1,40 +1,32 @@
-from typing import Mapping
+from __future__ import annotations
 
-from otherpowers_governance.signals.schema import (
-    Posture,
-    Uncertainty,
-    IntelligenceMode,
-    WithholdReason,
-)
-
-# IMPORTANT:
-# new_signal is sourced from the canonical signals API,
-# not from a legacy or phantom module.
-from otherpowers_governance.signals.api import new_signal
+from typing import Any, Optional
 
 
-class ColdStoragePostureEmissionBridge:
+class ColdStorageBridge:
     """
-    Translates posture summaries into governance-safe emission records.
+    Single responsibility:
+    - accept a governance-approved signal
+    - persist it (or refuse by returning None)
 
-    This bridge may return None to indicate:
-    - silence
-    - governance refusal
-    - intentional non-emission
+    This class must be boring, explicit, and side-effect constrained.
     """
 
-    def emit(self, summary: Mapping) -> Mapping | None:
-        if not summary:
+    def __init__(self, cold_storage: Optional[Any] = None) -> None:
+        self._cold_storage = cold_storage
+
+    def emit(self, signal: dict) -> Optional[Any]:
+        """
+        Returns:
+        - persisted signal (or downstream handle) on success
+        - None if storage refuses or is unavailable
+        """
+
+        if self._cold_storage is None:
             return None
 
-        posture = summary.get("posture")
-        if posture is None:
+        if not hasattr(self._cold_storage, "write"):
             return None
 
-        return new_signal(
-            posture=Posture(posture),
-            uncertainty=Uncertainty.UNKNOWN,
-            mode=IntelligenceMode.REFLECTIVE,
-            withhold=WithholdReason.NONE,
-        )
+        return self._cold_storage.write(signal)
 

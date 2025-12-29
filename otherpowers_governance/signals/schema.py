@@ -56,3 +56,12 @@ class SignalEnvelope:
     mode: Optional[IntelligenceMode] = None
     withhold_reason: Optional[WithholdReason] = None
 
+
+# --- Influence Spine Support ---
+
+
+@dataclass(frozen=True)
+class PostureSnapshot:
+    posture: Optional[str]
+    weight: float
+

@@ -1,11 +1,13 @@
 """
-Public Signals API.
+Public, stable API for OtherPowers.co Creative Intelligence.
 
 This module is the ONLY supported construction surface
 for governance-safe signals.
 """
 
-from typing import Mapping
+from __future__ import annotations
+
+from typing import Mapping, Optional
 
 from otherpowers_governance.signals.schema import (
     Posture,
@@ -17,10 +19,11 @@ from otherpowers_governance.signals.schema import (
 
 def new_signal(
     *,
-    posture: Posture,
-    uncertainty: Uncertainty,
-    mode: IntelligenceMode,
-    withhold: WithholdReason,
+    posture: Optional[Posture] = None,
+    uncertainty: Optional[Uncertainty] = None,
+    mode: Optional[IntelligenceMode] = None,
+    withhold: Optional[WithholdReason] = None,
+    payload: Optional[dict] = None,
 ) -> Mapping:
     """
     Canonical constructor for governance signals.
@@ -30,15 +33,25 @@ def new_signal(
     - testability
     - non-coercive boundaries
     """
-    return {
-        "posture": posture.value,
-        "uncertainty": uncertainty.value,
-        "mode": mode.value,
-        "withhold": withhold.value,
-    }
+    signal: dict = {}
+
+    if payload is not None:
+        signal["payload"] = payload
+
+    if posture is not None:
+        signal["posture"] = posture.value
+
+    if uncertainty is not None:
+        signal["uncertainty"] = uncertainty.value
+
+    if mode is not None:
+        signal["mode"] = mode.value
+
+    if withhold is not None:
+        signal["withhold"] = withhold.value
+
+    return signal
 
 
-__all__ = [
-    "new_signal",
-]
+__all__ = ["new_signal"]
 
