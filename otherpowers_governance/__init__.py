@@ -1,11 +1,9 @@
-"""
-OtherPowers Governance package.
+from __future__ import annotations
 
-Local-first, non-coercive intelligence attunement layer.
+from .policy import DissolutionMode, GovernanceDecision, GovernancePolicy
 
-This package intentionally avoids eager imports or runtime wiring.
-Concrete implementations must be imported explicitly at point of use.
-"""
-
-__all__ = []
-
+__all__ = [
+    "DissolutionMode",
+    "GovernanceDecision",
+    "GovernancePolicy",
+]

@@ -16,6 +16,9 @@ from otherpowers_governance.signals.schema import (
     WithholdReason,
 )
 
+# private, non-semantic marker
+_SIGNAL_MARKER = "__op_signal__"
+
 
 def new_signal(
     *,
@@ -26,14 +29,10 @@ def new_signal(
     payload: Optional[dict] = None,
 ) -> Mapping:
     """
-    Canonical constructor for governance signals.
-
-    Returns a plain mapping to preserve:
-    - serialization safety
-    - testability
-    - non-coercive boundaries
+    Canonical constructor for governance-safe signals.
     """
-    signal: dict = {}
+
+    signal: dict = {_SIGNAL_MARKER: True}
 
     if payload is not None:
         signal["payload"] = payload
