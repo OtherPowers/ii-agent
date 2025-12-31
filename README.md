@@ -193,17 +193,26 @@ https://en.wikipedia.org/wiki/Alice_Wong_(activist)
 Timnit Gebru
 https://en.wikipedia.org/wiki/Timnit_Gebru
 
+Prentis Hemphill
+https://en.wikipedia.org/wiki/Prentis_Hemphill
+
 Donna Haraway
 https://en.wikipedia.org/wiki/Donna_Haraway
 
 Ida B. Wells
 https://en.wikipedia.org/wiki/Ida_B._Wells
 
+Marcel Duchamp
+https://en.wikipedia.org/wiki/Marcel_Duchamp
+
 Ursula K. Le Guin
 https://en.wikipedia.org/wiki/Ursula_K._Le_Guin
 
 adrienne maree brown
 https://en.wikipedia.org/wiki/Adrienne_Maree_Brown
+
+Sharon Grace  
+https://en.wikipedia.org/wiki/Sharon_Grace
 
 Audre Lorde
 https://en.wikipedia.org/wiki/Audre_Lorde
