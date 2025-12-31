@@ -1,52 +1,56 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import Dict, Optional
 
-from otherpowers_governance.governance.renegotiation import RenegotiationIntent, RenegotiationResolution
+from otherpowers_governance.governance.renegotiation import (
+    RenegotiationIntent,
+    RenegotiationResolution,
+)
 
 
-class StasisActiveError(PermissionError):
-    """Raised when a contested invariant is in stasis and a change/execution is attempted."""
+class StasisEncountered(PermissionError):
+    def __init__(self, intent: RenegotiationIntent):
+        message = (
+            f"Stasis encountered for invariant '{intent.contested_invariant}'. "
+            f"Resolution Context: {intent.situated_context}. "
+            f"Renegotiation is underway."
+        )
+        super().__init__(message)
+        self.intent = intent
 
 
 class InvalidResolutionError(PermissionError):
-    """Raised when a resolution fails integrity checks (quorum/window/etc.)."""
+    pass
 
 
-class StasisGate:
-    """
-    Non-bypassable gate: once an invariant is contested, paths touching it enter stasis.
-    Clearing stasis requires a valid RenegotiationResolution (with quorum + closed window).
-    """
-
+class RelationalThreshold:
     def __init__(self) -> None:
-        self._active: Dict[str, bool] = {}
+        self._active_invariant: Optional[str] = None
         self._last_intent: Dict[str, RenegotiationIntent] = {}
 
-    def register_intent(self, intent: RenegotiationIntent) -> None:
-        inv = intent.contested_invariant
-        self._active[inv] = True
-        self._last_intent[inv] = intent
+    def hold_space(self, intent: RenegotiationIntent) -> None:
+        invariant = intent.contested_invariant
+        self._active_invariant = invariant
+        self._last_intent[invariant] = intent
 
-    def is_stasis_active(self, invariant: str) -> bool:
-        return bool(self._active.get(invariant, False))
+    def is_stasis_tended(self, invariant: str) -> bool:
+        return self._active_invariant == invariant
 
-    def require_not_in_stasis(self, invariant: str) -> None:
-        if self.is_stasis_active(invariant):
-            raise StasisActiveError(f"Stasis active for invariant '{invariant}'. Renegotiation required.")
+    def encounter(self, invariant: str) -> None:
+        if self._active_invariant == invariant:
+            raise StasisEncountered(self._last_intent[invariant])
 
-    def apply_resolution(self, resolution: RenegotiationResolution) -> None:
-        inv = resolution.contested_invariant
-        if not self.is_stasis_active(inv):
+    def stay_with_trouble(self, invariant: str) -> Optional[RenegotiationIntent]:
+        return self._last_intent.get(invariant)
+
+    def acknowledge_resolution(self, resolution: RenegotiationResolution) -> None:
+        if self._active_invariant is None:
             return
 
-        # Pydantic validation already enforces quorum + closed window.
-        # Here we enforce additional invariants: resolution must match last intent if present.
-        last = self._last_intent.get(inv)
-        if last and last.contested_invariant != inv:
-            raise InvalidResolutionError("Resolution invariant mismatch (integrity failure).")
+        if resolution.contested_invariant != self._active_invariant:
+            raise InvalidResolutionError(
+                "Resolution invariant mismatch (integrity failure)."
+            )
 
-        # If dissolved/forked outcomes occur, stasis clears but higher-level policy may halt/dissolve.
-        self._active[inv] = False
+        self._active_invariant = None
 
