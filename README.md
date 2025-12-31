@@ -180,3 +180,40 @@ It is a condition.
 
 If you are here to reduce harm, to protect ecosystems, or to explore new forms of coexistence across difference, this field is open to your participation and ready for your creativity and scaling harm-reduction.
 
+Gratitude is held for those whose lives and work shaped the ethical, imaginative, and relational contours of the OtherPowers Creative Intelligence field.
+
+Lineage and inspiration
+
+James Baldwin
+https://en.wikipedia.org/wiki/James_Baldwin
+
+Alice Wong
+https://en.wikipedia.org/wiki/Alice_Wong_(activist)
+
+Timnit Gebru
+https://en.wikipedia.org/wiki/Timnit_Gebru
+
+Donna Haraway
+https://en.wikipedia.org/wiki/Donna_Haraway
+
+Ida B. Wells
+https://en.wikipedia.org/wiki/Ida_B._Wells
+
+Ursula K. Le Guin
+https://en.wikipedia.org/wiki/Ursula_K._Le_Guin
+
+adrienne maree brown
+https://en.wikipedia.org/wiki/Adrienne_Maree_Brown
+
+Audre Lorde
+https://en.wikipedia.org/wiki/Audre_Lorde
+
+Octavia E. Butler
+https://en.wikipedia.org/wiki/Octavia_E._Butler
+
+Assata Shakur
+https://en.wikipedia.org/wiki/Assata_Shakur
+
+Frantz Fanon
+https://en.wikipedia.org/wiki/Frantz_Fanon
+
