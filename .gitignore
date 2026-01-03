@@ -200,3 +200,6 @@ output/
 
 # local only scripts
 start_tool_server.sh
+
+zz/
+
