@@ -193,3 +193,7 @@ data/events.db
 output/
 
 .vscode/
+
+zz_misc/
+zz_*/
+
