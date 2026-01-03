@@ -1,4 +1,4 @@
-<img width="3600" height="1890" alt="II-Agent-updated" src="https://github.com/user-attachments/assets/4e6211d1-c565-42a9-9d53-d809154a9493" />
+⚠️ Active development happens on the `otherpowers-main` branch.
 
 # II-Agent
 
