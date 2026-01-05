@@ -1,17 +1,12 @@
 """
 Relational Substrate for the OtherPowers ii-Agent.
 
-This module provides a *semantic receiving layer* for the codebase.
-It does not validate, enforce, judge, block, or decide.
+This module provides a non-authoritative receiver layer.
+It reflects language and structure without enforcing outcomes.
 
-It exists to:
-- receive linguistic signals
-- surface resonance compression
-- emit gentle echoes for human reflection
-- preserve the right to be misunderstood
-
-No output from this file has authority.
-All outputs are descriptive, never prescriptive.
+Nothing here blocks execution.
+Nothing here decides correctness.
+Everything here is descriptive and optional.
 """
 
 from __future__ import annotations
@@ -23,9 +18,9 @@ from pathlib import Path
 from typing import Dict, Set, Optional
 
 
-# ---------------------------------------------------------------------
-# Relational descriptors (non-hierarchical, non-scalar)
-# ---------------------------------------------------------------------
+# -----------------------------
+# Relational descriptors
+# -----------------------------
 
 class Formation(str, Enum):
     FRACTAL = "fractal"
@@ -44,10 +39,6 @@ class Formation(str, Enum):
 
 
 class Vibration(str, Enum):
-    """
-    Qualitative presence only.
-    NON-SCALAR. These are weather states, not priorities.
-    """
     STILL = "still"
     HUM = "hum"
     PULSE = "pulse"
@@ -56,45 +47,15 @@ class Vibration(str, Enum):
 
 @dataclass(frozen=True)
 class Atmosphere:
-    """
-    Descriptive context for a formation.
-    No constraints, only texture.
-    """
     vibration: Vibration = Vibration.HUM
     invites: Set[str] = field(default_factory=set)
     refracts: Set[str] = field(default_factory=set)
     note: str = ""
 
 
-# ---------------------------------------------------------------------
-# Atmospheric context (optional texture, not rules)
-# ---------------------------------------------------------------------
-
-FORMATION_ATMOSPHERES: Dict[Formation, Atmosphere] = {
-    Formation.DIAPAUSE: Atmosphere(
-        vibration=Vibration.STILL,
-        invites={"rest", "pause", "hold"},
-        refracts={"velocity", "hot_path"},
-        note="Protective stillness."
-    ),
-    Formation.SYMPOIETIC: Atmosphere(
-        vibration=Vibration.PULSE,
-        invites={"mutual", "shared", "together"},
-        refracts={"unilateral", "override"},
-        note="Collective making-with."
-    ),
-    Formation.BLOOM: Atmosphere(
-        vibration=Vibration.EXUBERANT,
-        invites={"play", "joy", "explore"},
-        refracts={"kpi", "metric", "target"},
-        note="Generative expansion without justification."
-    ),
-}
-
-
-# ---------------------------------------------------------------------
-# Semantic overlay (legacy-friendly, non-invasive)
-# ---------------------------------------------------------------------
+# -----------------------------
+# Soft maps (descriptive only)
+# -----------------------------
 
 FORMATION_MAP: Dict[str, Set[Formation]] = {
     "otherpowers_governance.governance.stasis": {Formation.DIAPAUSE},
@@ -105,13 +66,7 @@ FORMATION_MAP: Dict[str, Set[Formation]] = {
     },
 }
 
-
-# ---------------------------------------------------------------------
-# Language that often compresses context in legacy systems
-# These are surfaced, never forbidden.
-# ---------------------------------------------------------------------
-
-CONTEXT_COMPRESSORS: Set[str] = {
+COMPRESSIVE_TERMS: Set[str] = {
     "gate",
     "rank",
     "score",
@@ -124,22 +79,11 @@ CONTEXT_COMPRESSORS: Set[str] = {
 }
 
 
-# ---------------------------------------------------------------------
+# -----------------------------
 # Formation resolution
-# ---------------------------------------------------------------------
+# -----------------------------
 
-def formations_for_module(
-    module_path: str,
-    source: Optional[str] = None,
-) -> Set[Formation]:
-    """
-    Resolve formations for a module.
-
-    Precedence:
-    1. Docstring declaration:  Formation: bloom, polyphonic
-    2. Semantic overlay map
-    3. Default: dendritic
-    """
+def formations_for_module(module_path: str, source: Optional[str] = None) -> Set[Formation]:
     if source:
         try:
             tree = ast.parse(source)
@@ -147,9 +91,9 @@ def formations_for_module(
             if "Formation:" in doc:
                 raw = doc.split("Formation:")[1].splitlines()[0]
                 return {
-                    Formation(token.strip())
-                    for token in raw.split(",")
-                    if token.strip() in Formation._value2member_map_
+                    Formation(v.strip())
+                    for v in raw.split(",")
+                    if v.strip() in Formation._value2member_map_
                 }
         except Exception:
             pass
@@ -157,20 +101,46 @@ def formations_for_module(
     return FORMATION_MAP.get(module_path, {Formation.DENDRITIC})
 
 
-# ---------------------------------------------------------------------
-# Receiver (non-authoritative, non-policing)
-# ---------------------------------------------------------------------
+# -----------------------------
+# Receiver layer (NOT enforcement)
+# -----------------------------
 
 class Receiver:
     """
-    A relational receiver.
-
-    This class does not inspect correctness.
-    It simply receives signals and emits echoes
-    when language may compress relational context.
+    Receives and reflects linguistic density.
+    Emits context notes only.
     """
 
     def receive(self, module_path: str, source: str) -> None:
+        lowered = source.lower()
         formations = formations_for_module(module_path, source)
-        lowered = sou
+
+        for term in COMPRESSIVE_TERMS:
+            if term in lowered:
+                print(
+                    f"[echo] {module_path} contains '{term}' "
+                    f"(context may compress; posture={sorted(f.value for f in formations)})"
+                )
+
+
+# -----------------------------
+# Public entry point
+# -----------------------------
+
+def receive_tree(root: str = "otherpowers_governance") -> None:
+    """
+    Walks the repository and receives current resonance.
+    Never raises.
+    Never exits.
+    """
+    receiver = Receiver()
+
+    for path in Path(root).rglob("*.py"):
+        try:
+            receiver.receive(
+                str(path),
+                path.read_text(encoding="utf-8")
+            )
+        except Exception as e:
+            print(f"[residue] unable to read {path}: {e}")
 
