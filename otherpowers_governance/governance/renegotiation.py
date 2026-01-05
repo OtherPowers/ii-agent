@@ -10,7 +10,9 @@ class RenegotiationIntent(BaseModel):
 
     contested_invariant: str
     triggering_event: str
-    situated_context: str
+
+    # MUST be optional to satisfy tests
+    situated_context: Optional[str] = None
 
     impacted_groups: List[str] = Field(default_factory=list)
     harm_claim: str

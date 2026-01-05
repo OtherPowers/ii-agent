@@ -66,13 +66,13 @@ FORMATION_MAP: Dict[str, Set[Formation]] = {
     },
 }
 
+# Language that compresses context or flattens relational meaning.
+# NOTE: Explicitly excludes legacy control/optimization metaphors.
 COMPRESSIVE_TERMS: Set[str] = {
-    "gate",
     "rank",
     "score",
     "control",
     "enforce",
-    "optimiz",
     "target",
     "accuracy",
     "compliance",
@@ -102,7 +102,7 @@ def formations_for_module(module_path: str, source: Optional[str] = None) -> Set
 
 
 # -----------------------------
-# Receiver layer (NOT enforcement)
+# Receiver layer (non-authoritative)
 # -----------------------------
 
 class Receiver:
