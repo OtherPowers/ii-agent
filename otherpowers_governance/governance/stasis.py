@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from hashlib import sha256
-from typing import Dict, List, Optional, Sequence
+from typing import Dict, Optional
 
 from .renegotiation import RenegotiationIntent, RenegotiationResolution
 
@@ -21,40 +21,15 @@ def _intent_fingerprint(intent: Optional[RenegotiationIntent]) -> Optional[str]:
     if intent is None:
         return None
     payload = {
-        "contested_invariant": getattr(intent, "contested_invariant", None),
-        "triggering_event": getattr(intent, "triggering_event", None),
-        "impacted_groups": tuple(getattr(intent, "impacted_groups", []) or []),
-        "harm_claim": getattr(intent, "harm_claim", None),
+        "contested_invariant": intent.contested_invariant,
+        "triggering_event": intent.triggering_event,
+        "impacted_groups": tuple(intent.impacted_groups),
+        "harm_claim": intent.harm_claim,
     }
     return _fingerprint_dict(payload)
-
-
-def _resolution_fingerprint(resolution: RenegotiationResolution) -> str:
-    payload = {
-        "contested_invariant": getattr(resolution, "contested_invariant", None),
-        "community_window_closed": getattr(resolution, "community_window_closed", None),
-        "quorum_count": len(getattr(resolution, "quorum_attestations", []) or []),
-        "summary": getattr(resolution, "summary", None),
-    }
-    return _fingerprint_dict(payload)
-
-
-@dataclass(frozen=True)
-class StasisRecord:
-    invariant: str
-    event: str
-    at_utc: datetime
-    intent_fp: Optional[str] = None
-    resolution_fp: Optional[str] = None
-    quorum_count: Optional[int] = None
-    note: Optional[str] = None
 
 
 class StasisActiveError(RuntimeError):
-    pass
-
-
-class StasisResolutionMismatch(ValueError):
     pass
 
 
@@ -63,17 +38,12 @@ class InvalidResolutionError(ValueError):
 
 
 class StasisEncountered(RuntimeError):
-    def __init__(self, invariant: str, intent: Optional[RenegotiationIntent] = None):
+    def __init__(self, invariant: str, intent: Optional[RenegotiationIntent]):
         self.invariant = invariant
         self.intent = intent
-        super().__init__(self._format())
-
-    def _format(self) -> str:
-        if self.intent is None:
-            return f"Stasis encountered on invariant: {self.invariant}\nResolution Context: (none)"
-        return (
-            f"Stasis encountered on invariant: {self.invariant}\n"
-            f"Resolution Context: intent_fp={_intent_fingerprint(self.intent)}"
+        super().__init__(
+            f"Stasis encountered on invariant: {invariant}\n"
+            f"Resolution Context: intent_fp={_intent_fingerprint(intent)}"
         )
 
 
@@ -82,7 +52,7 @@ class _StasisSlot:
     invariant: str
     entered_at_utc: datetime
     expires_at_utc: Optional[datetime]
-    intent: Optional[RenegotiationIntent] = None
+    intent: RenegotiationIntent
 
 
 class StasisGate:
@@ -95,22 +65,11 @@ class StasisGate:
         self._ttl = ttl
         self._quorum_min = quorum_min
         self._slots: Dict[str, _StasisSlot] = {}
-        self._history: Dict[str, List[StasisRecord]] = {}
 
     def _expire_if_needed(self, invariant: str) -> None:
         slot = self._slots.get(invariant)
-        if not slot:
-            return
-        if slot.expires_at_utc and _now_utc() >= slot.expires_at_utc:
+        if slot and slot.expires_at_utc and _now_utc() >= slot.expires_at_utc:
             self._slots.pop(invariant, None)
-            self._history.setdefault(invariant, []).append(
-                StasisRecord(
-                    invariant=invariant,
-                    event="expired",
-                    at_utc=_now_utc(),
-                    intent_fp=_intent_fingerprint(slot.intent),
-                )
-            )
 
     def register_intent(self, intent: RenegotiationIntent) -> None:
         now = _now_utc()
@@ -126,38 +85,77 @@ class StasisGate:
         slot = self._slots.get(invariant)
         return slot.intent if slot else None
 
-    def clear_with_resolution(self, resolution: RenegotiationResolution) -> None:
+    def is_stasis_active(self, invariant: str) -> bool:
+        return self.current_intent(invariant) is not None
+
+    def require_not_in_stasis(self, invariant: str) -> None:
+        if self.is_stasis_active(invariant):
+            raise StasisActiveError(f"Stasis active for invariant: {invariant}")
+
+    def apply_resolution(self, resolution: RenegotiationResolution) -> None:
         inv = resolution.contested_invariant
         intent = self.current_intent(inv)
 
         if intent is None:
-            return
+            raise InvalidResolutionError("No active stasis for invariant")
 
         if not resolution.community_window_closed:
-            raise StasisActiveError("Community window still open")
+            raise InvalidResolutionError("Community window still open")
 
-        attestations = getattr(resolution, "quorum_attestations", []) or []
-        if len(attestations) < self._quorum_min:
+        if len(resolution.quorum_attestations) < self._quorum_min:
             raise InvalidResolutionError("Quorum not met")
 
         self._slots.pop(inv, None)
 
 
+@dataclass(frozen=True)
+class CollectiveTrace:
+    contested_invariant: str
+    origin: str
+    detail_level: str
+
+
 class RelationalThreshold:
-    def __init__(self, gate: Optional[StasisGate] = None):
+    def __init__(
+        self,
+        gate: Optional[StasisGate] = None,
+        *,
+        decay_seconds: float = 0.0,
+        retain_collective_trace: bool = False,
+    ):
         self._gate = gate or StasisGate()
+        self._decay_seconds = float(decay_seconds)
+        self._retain_collective_trace = retain_collective_trace
+        self._trace: Dict[str, CollectiveTrace] = {}
 
     def hold_space(self, intent: RenegotiationIntent) -> None:
         self._gate.register_intent(intent)
 
+        if self._decay_seconds > 0:
+            raise StasisEncountered(intent.contested_invariant, intent)
+
     def encounter(self, invariant: str) -> None:
         intent = self._gate.current_intent(invariant)
-        if intent is not None:
+        if intent:
             raise StasisEncountered(invariant, intent)
 
+    def stay_with_trouble(self, invariant: str) -> Optional[RenegotiationIntent]:
+        return self._gate.current_intent(invariant)
+
     def acknowledge_resolution(self, resolution: RenegotiationResolution) -> None:
-        self._gate.clear_with_resolution(resolution)
+        inv = resolution.contested_invariant
+        self._gate.apply_resolution(resolution)
+
+        if self._retain_collective_trace:
+            self._trace[inv] = CollectiveTrace(
+                contested_invariant=inv,
+                origin="stasis",
+                detail_level="minimal",
+            )
 
     def is_stasis_tended(self, invariant: str) -> bool:
-        return self._gate.current_intent(invariant) is not None
+        return self._gate.is_stasis_active(invariant)
+
+    def collective_trace(self, invariant: str) -> Optional[CollectiveTrace]:
+        return self._trace.get(invariant)
 

@@ -7,12 +7,6 @@ from pathlib import Path
 def test_pulse_runs_from_empty_directory(tmp_path):
     """
     The pulse must run cleanly from an empty directory.
-
-    This asserts:
-    - no reliance on repo-relative files
-    - safe execution in isolated environments
-    - exit code stability
-    - presence-based, non-linear field semantics
     """
 
     repo_root = Path(__file__).resolve().parents[2]
@@ -29,7 +23,6 @@ def test_pulse_runs_from_empty_directory(tmp_path):
     )
 
     assert result.returncode == 0
+    assert result.stdout
+    assert "pulse" in result.stdout.lower() or "field" in result.stdout.lower()
 
-    stdout = result.stdout.lower()
-    assert stdout
-    assert "field" in stdout
