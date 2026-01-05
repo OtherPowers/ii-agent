@@ -1,86 +1,145 @@
 """
 Seasonal Pulse for the OtherPowers ii-Agent.
 
-This module receives the current ecological texture of the repository
-and offers a seasonal reading. It does not measure progress, enforce
-norms, or imply linear advancement.
+This module receives the ecological texture of the repository
+and offers a poly-seasonal reading.
 
-All outputs are descriptive signals only.
+The field may hold multiple seasons at once.
+No season outranks another.
+No season implies progress, delay, or deficiency.
+
+All outputs are descriptive offerings.
 """
 
 from __future__ import annotations
 
-import subprocess
+import hashlib
 from pathlib import Path
-from typing import List
+from datetime import datetime, timezone
 
 from otherpowers_governance.registry import receive_tree
 
 
-# -----------------------------
-# Ecological helpers
-# -----------------------------
+# ---------------------------------
+# Cyclical field language
+# ---------------------------------
 
-def _recent_git_activity() -> List[str]:
+SEASONS = (
+    "deep winter (resting field)",
+    "early spring (gentle stirring)",
+    "high summer (active growth)",
+    "late autumn (integration and composting)",
+)
+
+VITALS_FILE = Path("VITALS.md")
+
+
+# ---------------------------------
+# Ecological sensing (non-linear)
+# ---------------------------------
+
+def _field_signature(root: str = "otherpowers_governance") -> str:
     """
-    Returns recent commit subjects as a soft environmental trace.
-    Uses git only as a terrain sensor, not an authority.
+    Produces a stable ecological signature from the field itself.
+
+    Uses file paths only.
+    No timestamps.
+    No quantities.
+    No activity signals.
     """
-    try:
-        output = subprocess.check_output(
-            ["git", "log", "--oneline", "-n", "12"],
-            stderr=subprocess.DEVNULL,
-            text=True,
-        )
-        return [line.strip() for line in output.splitlines() if line.strip()]
-    except Exception:
-        return []
+    paths = sorted(
+        str(p.relative_to(root))
+        for p in Path(root).rglob("*.py")
+    )
+
+    joined = "\n".join(paths).encode("utf-8")
+    return hashlib.sha256(joined).hexdigest()
 
 
-def _seasonal_drift(commits: List[str]) -> str:
+def _poly_season_from_signature(signature: str) -> tuple[str, str]:
     """
-    Interprets repository motion as seasonal drift.
-    This is cyclical, non-linear, and non-ordinal.
+    Maps the field signature onto two co-present seasons.
+
+    This allows overlapping ecological states without hierarchy.
     """
-    if not commits:
-        return "deep winter (resting field)"
+    a = int(signature[:2], 16) % len(SEASONS)
+    b = int(signature[2:4], 16) % len(SEASONS)
 
-    if len(commits) <= 3:
-        return "early spring (gentle stirring)"
+    if a == b:
+        b = (b + 1) % len(SEASONS)
 
-    if len(commits) <= 8:
-        return "high summer (active growth)"
-
-    return "late autumn (integration and composting)"
+    return SEASONS[a], SEASONS[b]
 
 
-# -----------------------------
+# ---------------------------------
+# Artifact writing (descriptive only)
+# ---------------------------------
+
+def _record_vitals(seasons: tuple[str, str]) -> None:
+    """
+    Appends a descriptive seasonal mark to VITALS.md.
+
+    This is not a log of behavior.
+    It is a climate trace.
+    """
+    timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+    entry = (
+        "\n---\n"
+        f"Moment: {timestamp}\n"
+        f"Field Climate:\n"
+        f"- {seasons[0]}\n"
+        f"- {seasons[1]}\n"
+    )
+
+    VITALS_FILE.write_text(
+        VITALS_FILE.read_text() + entry
+        if VITALS_FILE.exists()
+        else entry,
+        encoding="utf-8",
+    )
+
+
+# ---------------------------------
 # Pulse entrypoint
-# -----------------------------
+# ---------------------------------
 
 def main() -> None:
     print("\n--- Seasonal Pulse ---\n")
     print("Receiving current field conditions...\n")
 
-    # Receive linguistic resonance (non-authoritative)
+    # Linguistic reception (non-authoritative)
     receive_tree()
 
-    # Read environmental texture
-    recent = _recent_git_activity()
-    season = _seasonal_drift(recent)
+    # Ecological reading
+    signature = _field_signature()
+    seasons = _poly_season_from_signature(signature)
 
-    print("\n--- Seasonal Reading ---\n")
-    print(f"The field is in: {season}.")
+    print("\n--- Field Climate ---\n")
+    print("The field currently holds:\n")
+    print(f"• {seasons[0]}")
+    print(f"• {seasons[1]}\n")
     print(
-        "This is a descriptive rhythm, not an evaluation.\n"
-        "If it resonates, you may leave a short reflection.\n"
+        "These seasons coexist.\n"
+        "Neither explains the other.\n"
+        "Neither requires action.\n"
+    )
+
+    print(
+        "If you wish, you may leave a short reflection.\n"
         "Press Enter to continue without offering."
     )
 
     try:
-        input("\nReflection:\n> ")
+        reflection = input("\nReflection:\n> ").strip()
     except EOFError:
-        pass
+        reflection = ""
+
+    if reflection:
+        _record_vitals(seasons)
+        print("\nThank you. The field has been acknowledged.\n")
+    else:
+        print("\nNo reflection offered. The field remains held.\n")
 
 
 if __name__ == "__main__":
