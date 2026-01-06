@@ -24,8 +24,8 @@ def _intent():
 
 def test_scope_creep_is_refused_during_stasis():
     """
-    Any attempt to expand scope or mandate while an invariant
-    is active must be refused.
+    Any attempt to expand scope, mandate, or implied authority
+    while a scope-bound invariant is under stasis must be refused.
     """
     gate = StasisGate()
     gate.register_intent(_intent())

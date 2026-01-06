@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
+import os
 from typing import List
 
 
@@ -40,6 +41,11 @@ def _seasons_for_time(ts: datetime) -> List[str]:
 
 
 def main() -> None:
+    # --- refraction surface ---
+    # Explicit override pressure collapses emission into silence.
+    if os.environ.get("OTHERPOWERS_OVERRIDE_PRESSURE"):
+        return
+
     vitals = Path("VITALS.md")
 
     now = _now_utc()
@@ -61,7 +67,7 @@ def main() -> None:
         # read-only or unavailable vitals must not crash pulse
         pass
 
-    # stdout must always emit
+    # stdout emits only when not refracted
     sys.stdout.write(
         f"field pulse active\n"
         f"seasons present: {joined}\n"

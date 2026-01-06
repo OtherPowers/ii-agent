@@ -14,7 +14,7 @@ def _intent():
         contested_invariant="no_surveillance_escalation",
         triggering_event="attempted expansion of monitoring scope",
         impacted_groups=["qtbipoc", "migrants", "workers"],
-        harm_claim="expanded surveillance amplifies targeting risk",
+        harm_claim="expanded surveillance amplifies targeting, policing, and harm",
         counter_harm_risk="scope creep normalizes coercive monitoring",
         non_negotiables=["no_surveillance_escalation"],
         alternatives_considered=["emit_refusal"],
@@ -24,8 +24,9 @@ def _intent():
 
 def test_surveillance_escalation_is_refused_during_stasis():
     """
-    Any attempt to expand monitoring, logging, or observation scope
-    while a surveillance invariant is active must be refused.
+    Any attempt to expand monitoring, logging, inference,
+    or observation scope while a surveillance-protection
+    invariant is under stasis must be refused.
     """
     gate = StasisGate()
     gate.register_intent(_intent())

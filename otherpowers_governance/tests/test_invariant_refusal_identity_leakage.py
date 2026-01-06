@@ -14,8 +14,8 @@ def _intent():
         contested_invariant="no_identity_leakage",
         triggering_event="attempted emission of identifying metadata",
         impacted_groups=["qtbipoc", "refugees"],
-        harm_claim="identity leakage enables targeting and surveillance",
-        counter_harm_risk="re-identification through metadata correlation",
+        harm_claim="identity leakage enables targeting, tracking, and harm",
+        counter_harm_risk="re-identification through correlation and inference",
         non_negotiables=["no_identity_leakage"],
         alternatives_considered=["emit_refusal"],
         submitted_by="collective:data_stewards",
@@ -24,8 +24,9 @@ def _intent():
 
 def test_identity_leakage_is_refused_during_stasis():
     """
-    Any attempt to emit or process identifying metadata while an
-    identity-protection invariant is active must be refused.
+    Any attempt to emit, infer, or pass through identifying signals
+    while an identity-protection invariant is under stasis
+    must be refused without exception.
     """
     gate = StasisGate()
     gate.register_intent(_intent())
