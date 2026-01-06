@@ -250,7 +250,7 @@ These names are offered with gratitude, not extraction.
   Abolitionist and scholar whose work grounds this field’s rejection of carceral logic and coercive systems.  
   https://en.wikipedia.org/wiki/Angela_Davis
 
-  - **Bisan Owda**  
+- **Bisan Owda**  
 'The Pulse of Persistence' in OtherPowers Creative Intelligence Field owes great inspireation to Bisan. 
 Bisan’s life and community work provides the field with its most critical understanding of Succession and Recovery. She demonstrates how a field remains coherent even when the external "Shadow" is at its most destructive. Her resilience is inspo-mapped to this creative field's sense of 'Polyphonic Resistance' (the ability and/or IRL superpower to hold a singular as well as a collective truth, while surrounded by overwhelming noise. 
   https://en.wikipedia.org/wiki/Bisan_Owda
