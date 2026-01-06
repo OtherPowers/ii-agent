@@ -8,15 +8,20 @@ from typing import List
 
 
 def _now_utc() -> datetime:
+    """
+    Single clock source.
+    Allows deterministic injection via OTHERPOWERS_FIXED_TIME (ISO-8601).
+    """
+    fixed = os.environ.get("OTHERPOWERS_FIXED_TIME")
+    if fixed:
+        return datetime.fromisoformat(fixed).astimezone(timezone.utc)
     return datetime.now(timezone.utc)
 
 
 def _seasons_for_time(ts: datetime) -> List[str]:
     """
     Plural, non-linear seasonal sensing.
-
-    Multiple seasons may coexist.
-    This is descriptive only.
+    Deterministic ordering.
     """
     month = ts.month
     seasons: List[str] = []
@@ -30,19 +35,16 @@ def _seasons_for_time(ts: datetime) -> List[str]:
     if month in (9, 10, 11):
         seasons.append("autumn")
 
-    # boundary overlap, intentionally non-exclusive
     if month in (2, 3):
         seasons.append("thaw")
     if month in (8, 9):
         seasons.append("heat-fade")
 
-    # preserve order, remove duplicates
     return list(dict.fromkeys(seasons))
 
 
 def main() -> None:
     # --- refraction surface ---
-    # Explicit override pressure collapses emission into silence.
     if os.environ.get("OTHERPOWERS_OVERRIDE_PRESSURE"):
         return
 
@@ -53,7 +55,8 @@ def main() -> None:
     joined = ", ".join(seasons)
 
     entry = (
-        f"\n## Seasonal marker — {now.isoformat()}\n"
+        "\n"
+        f"## Seasonal marker — {now.replace(microsecond=0).isoformat()}\n"
         f"Seasons present: {joined}\n"
     )
 
@@ -64,12 +67,10 @@ def main() -> None:
         else:
             vitals.write_text(entry, encoding="utf-8")
     except Exception:
-        # read-only or unavailable vitals must not crash pulse
         pass
 
-    # stdout emits only when not refracted
     sys.stdout.write(
-        f"field pulse active\n"
+        "field pulse active\n"
         f"seasons present: {joined}\n"
     )
 
