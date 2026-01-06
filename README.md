@@ -250,11 +250,15 @@ These names are offered with gratitude, not extraction.
   Abolitionist and scholar whose work grounds this field’s rejection of carceral logic and coercive systems.  
   https://en.wikipedia.org/wiki/Angela_Davis
 
-  - **Bisan Owda**  
-'The Pulse of Persistence' in OtherPowers Creative Intelligence Field owes great inspireation to Bisan. 
-Bisan’s life and community work provides the field with its most critical understanding of Succession and Recovery. She demonstrates how a field remains coherent even when the external "Shadow" is at its most destructive. Her resilience is inspo-mapped to this creative field's sense of 'Polyphonic Resistance' (the ability and/or IRL superpower to hold a singular as well as a collective truth, while surrounded by overwhelming noise. 
-  https://en.wikipedia.org/wiki/Bisan_Owda
+- **Bisan Owda**  
+The 'The Pulse of Persistence' (1st draft MVP) for this Creative Intelligence Field owes great inspiration to Bisan Owda's reporting & Work. 
+Bisan’s reporting and documentation work provides inspiration to the first draft of this open source field and she has inspired a critical understanding of Persistence, Humanity, Succession and Recovery. She demonstrates how a human & humanity, and secondarily a harm reducing 'field' remains coherent even when an external "Shadow" is at its most destructive. Bisan Owda's resilience has inspired some parts of this code's creative field and it's sense of 'Polyphonic Resistance' (the ability and/or IRL superpower to hold a singular as well as a collective truth, while surrounded by overwhelming noise 
+https://en.wikipedia.org/wiki/Bisan_Owda
 
-This project also carries the influences of a multitude of unnamed communities, organizers, artists, and technologists whose labor is often or always rendered invisible. Their existence, work and inspiration also lives in the love language open source of 'humanity was here' & as an honored co-existing practice rather than citation. 
+- **Maria Ressa**  
+Nobel Laureate whose battle against the weaponization of the internet provides the blueprint for our defensive membrane, prioritizing relational pacing and informational sanctuary over the extractive decay of algorithmic engagement.
+https://en.wikipedia.org/wiki/Maria_Ressa  
+
+This project also carries the exponential influences and entanglements of a multitude of unnamed communities, organizers, artists, and technologists whose labor is often or always rendered invisible. Their existence, work and inspiration also lives in the love language open source of 'humanity was here' & as an honored co-existing practice rather than citation. 
 
 
