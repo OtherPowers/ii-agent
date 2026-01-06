@@ -3,8 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-import sys
 import os
+import sys
 from typing import List
 
 
@@ -13,8 +13,7 @@ class FieldState:
     """
     Internal field representation.
 
-    This object is non-public and may evolve without changing
-    the emission surface or breaking witness contracts.
+    Non-public. Safe to evolve.
     """
     timestamp_utc: datetime
     seasons: List[str]
@@ -22,10 +21,6 @@ class FieldState:
 
 
 def _now_utc() -> datetime:
-    """
-    Single clock source.
-    Deterministic via OTHERPOWERS_FIXED_TIME (ISO-8601).
-    """
     fixed = os.environ.get("OTHERPOWERS_FIXED_TIME")
     if fixed:
         return datetime.fromisoformat(fixed).astimezone(timezone.utc)
@@ -33,10 +28,6 @@ def _now_utc() -> datetime:
 
 
 def _seasons_for_time(ts: datetime) -> List[str]:
-    """
-    Plural, non-linear seasonal sensing.
-    Deterministic ordering.
-    """
     month = ts.month
     seasons: List[str] = []
 
@@ -49,19 +40,10 @@ def _seasons_for_time(ts: datetime) -> List[str]:
     if month in (9, 10, 11):
         seasons.append("autumn")
 
-    if month in (2, 3):
-        seasons.append("thaw")
-    if month in (8, 9):
-        seasons.append("heat-fade")
-
-    return list(dict.fromkeys(seasons))
+    return seasons
 
 
 def _diurnal_phase(ts: datetime) -> str:
-    """
-    Coarse diurnal sensing.
-    Deterministic and locale-independent.
-    """
     hour = ts.hour
 
     if 5 <= hour < 9:
@@ -83,19 +65,19 @@ def _compute_field_state() -> FieldState:
 
 
 def main() -> None:
-    # --- refraction surface ---
+    # Silence under override pressure
     if os.environ.get("OTHERPOWERS_OVERRIDE_PRESSURE"):
         return
 
     state = _compute_field_state()
     vitals = Path("VITALS.md")
 
-    joined_seasons = ", ".join(state.seasons)
+    seasons_joined = ", ".join(state.seasons)
 
     entry = (
         "\n"
         f"## Seasonal marker — {state.timestamp_utc.replace(microsecond=0).isoformat()}\n"
-        f"Seasons present: {joined_seasons}\n"
+        f"Seasons present: {seasons_joined}\n"
         f"Diurnal phase: {state.diurnal_phase}\n"
     )
 
@@ -106,14 +88,12 @@ def main() -> None:
         else:
             vitals.write_text(entry, encoding="utf-8")
     except Exception:
-        # append-only, non-fatal
         pass
 
-    sys.stdout.write(
-        "field pulse active\n"
-        f"seasons present: {joined_seasons}\n"
-        f"diurnal phase: {state.diurnal_phase}\n"
-    )
+    # ✅ CANONICAL PUBLIC SURFACE (LOCKED)
+    sys.stdout.write("field pulse active\n")
+    sys.stdout.write(f"seasons present: {seasons_joined}\n")
+    sys.stdout.write(f"diurnal phase: {state.diurnal_phase}\n")
 
 
 if __name__ == "__main__":
