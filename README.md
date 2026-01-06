@@ -1,8 +1,8 @@
 # OtherPowers ii-Agent
 
-OtherPowers ii-Agent is a creative intelligence field designed for human communities and other intelligences to explore and co-create, offering a field where coordination, learning, inspiration, and creation emerge through restraint, presence, and care.
+OtherPowers ii-Agent is a creative intelligence field designed for human communities and other intelligences to explore, protect and/or co-create, offering a field where coordination, learning, inspiration, and creation emerge through restraint, presence, and care. OtherPowers ii-Agent is a harm-reduction creative intelligence field grounded in relational sensing and atmospheric coherence.
 
-At first contact, it appears as a calm, architecture-forward system. Modular, testable, and legible.
+At first contact, it appears as a calm, architecture-forward system. Modular, testable, and legible. 
 
 At depth, it functions as an Interface Field, a shared surface of encounter rather than control, where participation is invited without coercion.
 
@@ -179,4 +179,82 @@ This system is not an answer.
 It is a condition.
 
 If you are here to reduce harm, to protect ecosystems, or to explore new forms of coexistence across difference, this field is open to your participation and ready for your creativity and scaling harm-reduction.
+
+## Acknowledgements & Inspirations
+
+OtherPowers ii-Agent is shaped by many lineages of thought, care, refusal, and creative courage. What follows is not a canon and not a hierarchy. It is a set of acknowledgements for thinkers, organizers, artists, and practitioners whose work helped make this field possible.
+
+These names are offered with gratitude, not extraction.
+
+- **Alice Wong**  
+  Disability justice organizer and founder of the Disability Visibility Project, whose work grounds care, access, and dignity as non-negotiable conditions of participation.  
+  https://en.wikipedia.org/wiki/Alice_Wong_(activist)
+
+- **Timnit Gebru**  
+  Computer scientist and advocate for ethical AI whose insistence on accountability, context, and refusal reshaped how technical systems relate to power.  
+  https://en.wikipedia.org/wiki/Timnit_Gebru
+
+- **Prentis Hemphill**  
+  Somatics teacher and organizer whose work on embodiment, trauma, and relational healing informs how systems can slow down and repair.  
+  https://en.wikipedia.org/wiki/Prentis_Hemphill
+
+- **adrienne maree brown**  
+  Writer and facilitator whose articulation of emergent strategy, care, and collective transformation deeply influences this field’s orientation.  
+  https://en.wikipedia.org/wiki/Adrienne_Maree_Brown
+
+- **Ida B. Wells**  
+  Journalist and truth-teller whose refusal of silence in the face of violence anchors this project’s commitment to counter-testimony.  
+  https://en.wikipedia.org/wiki/Ida_B._Wells
+
+- **Assata Shakur**  
+  Political activist whose writings on liberation, care, and resistance continue to shape abolitionist imagination.  
+  https://en.wikipedia.org/wiki/Assata_Shakur
+
+- **Donna Haraway**  
+  Scholar whose work on situated knowledge and relational thinking informs the rejection of “view from nowhere” intelligence.  
+  https://en.wikipedia.org/wiki/Donna_Haraway
+
+- **Sharon Grace**  
+  Artist and educator whose work in experimental media and systems thinking expands how technology, art, and presence can coexist.  
+  https://en.wikipedia.org/wiki/Sharon_Grace
+
+- **Marcel Duchamp**  
+  Artist whose refusal of convention and embrace of conceptual disruption opened space for non-linear creative intelligence.  
+  https://en.wikipedia.org/wiki/Marcel_Duchamp
+
+- **James Baldwin**  
+  Writer and witness whose clarity, love, and refusal of dehumanization guide this project’s moral center.  
+  https://en.wikipedia.org/wiki/James_Baldwin
+
+- **Ursula K. Le Guin**  
+  Writer whose explorations of power, care, and alternative social systems profoundly inform this field’s speculative grounding.  
+  https://en.wikipedia.org/wiki/Ursula_K._Le_Guin
+
+- **Octavia E. Butler**  
+  Writer whose visions of change, adaptation, and survival continue to shape how this system thinks about future intelligence.  
+  https://en.wikipedia.org/wiki/Octavia_E._Butler
+
+- **Audre Lorde**  
+  Poet and theorist whose work insists that difference is a source of power rather than a problem to be solved.  
+  https://en.wikipedia.org/wiki/Audre_Lorde
+
+- **bell hooks**  
+  Cultural critic whose writing on love, domination, and liberation informs this project’s refusal of supremacy.  
+  https://en.wikipedia.org/wiki/Bell_hooks
+
+- **W. E. B. Du Bois**  
+  Scholar whose analysis of power, history, and double consciousness continues to shape ethical inquiry.  
+  https://en.wikipedia.org/wiki/W._E._B._Du_Bois
+
+- **Angela Davis**  
+  Abolitionist and scholar whose work grounds this field’s rejection of carceral logic and coercive systems.  
+  https://en.wikipedia.org/wiki/Angela_Davis
+
+  - **Bisan Owda**  
+'The Pulse of Persistence' in OtherPowers Creative Intelligence Field owes great inspireation to Bisan. 
+Bisan’s life and community work provides the field with its most critical understanding of Succession and Recovery. She demonstrates how a field remains coherent even when the external "Shadow" is at its most destructive. Her resilience is inspo-mapped to this creative field's sense of 'Polyphonic Resistance' (the ability and/or IRL superpower to hold a singular as well as a collective truth, while surrounded by overwhelming noise. 
+  https://en.wikipedia.org/wiki/Bisan_Owda
+
+This project also carries the influences of a multitude of unnamed communities, organizers, artists, and technologists whose labor is often or always rendered invisible. Their existence, work and inspiration also lives in the love language open source of 'humanity was here' & as an honored co-existing practice rather than citation. 
+
 
