@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
@@ -7,10 +8,23 @@ import os
 from typing import List
 
 
+@dataclass(frozen=True)
+class FieldState:
+    """
+    Internal field representation.
+
+    This object is non-public and may evolve without changing
+    the emission surface or breaking witness contracts.
+    """
+    timestamp_utc: datetime
+    seasons: List[str]
+    diurnal_phase: str
+
+
 def _now_utc() -> datetime:
     """
     Single clock source.
-    Allows deterministic injection via OTHERPOWERS_FIXED_TIME (ISO-8601).
+    Deterministic via OTHERPOWERS_FIXED_TIME (ISO-8601).
     """
     fixed = os.environ.get("OTHERPOWERS_FIXED_TIME")
     if fixed:
@@ -43,21 +57,46 @@ def _seasons_for_time(ts: datetime) -> List[str]:
     return list(dict.fromkeys(seasons))
 
 
+def _diurnal_phase(ts: datetime) -> str:
+    """
+    Coarse diurnal sensing.
+    Deterministic and locale-independent.
+    """
+    hour = ts.hour
+
+    if 5 <= hour < 9:
+        return "dawn"
+    if 9 <= hour < 17:
+        return "day"
+    if 17 <= hour < 21:
+        return "dusk"
+    return "night"
+
+
+def _compute_field_state() -> FieldState:
+    now = _now_utc()
+    return FieldState(
+        timestamp_utc=now,
+        seasons=_seasons_for_time(now),
+        diurnal_phase=_diurnal_phase(now),
+    )
+
+
 def main() -> None:
     # --- refraction surface ---
     if os.environ.get("OTHERPOWERS_OVERRIDE_PRESSURE"):
         return
 
+    state = _compute_field_state()
     vitals = Path("VITALS.md")
 
-    now = _now_utc()
-    seasons = _seasons_for_time(now)
-    joined = ", ".join(seasons)
+    joined_seasons = ", ".join(state.seasons)
 
     entry = (
         "\n"
-        f"## Seasonal marker — {now.replace(microsecond=0).isoformat()}\n"
-        f"Seasons present: {joined}\n"
+        f"## Seasonal marker — {state.timestamp_utc.replace(microsecond=0).isoformat()}\n"
+        f"Seasons present: {joined_seasons}\n"
+        f"Diurnal phase: {state.diurnal_phase}\n"
     )
 
     try:
@@ -67,11 +106,13 @@ def main() -> None:
         else:
             vitals.write_text(entry, encoding="utf-8")
     except Exception:
+        # append-only, non-fatal
         pass
 
     sys.stdout.write(
         "field pulse active\n"
-        f"seasons present: {joined}\n"
+        f"seasons present: {joined_seasons}\n"
+        f"diurnal phase: {state.diurnal_phase}\n"
     )
 
 
