@@ -22,6 +22,9 @@ class SensingLattice:
 
     Describes atmospheric coherence, not outcomes.
     Never scores, ranks, predicts, or evaluates beings.
+
+    Answers only:
+    what kinds of presence feel appropriate right now
     """
 
     postures: List[Posture]
@@ -34,10 +37,9 @@ def attune(field: FieldState) -> SensingLattice:
     """
     Deterministic, side-effect free attunement.
 
-    Density shapes texture, not permission.
+    Expressive density shapes texture, not permission.
     """
 
-    # EXPRESSIVE DENSITY — attribute, not callable
     density = field.expressive_density
 
     postures: List[Posture] = ["listening"]
@@ -57,29 +59,30 @@ def attune(field: FieldState) -> SensingLattice:
         resonance_notes.append("silence is stabilizing")
         protective = True
 
-    # --- cooldown rule ---
+    # --- cooldown window ---
     in_cooldown = field.diurnal_phase in ("night", "dawn")
+
+    # --- expressive density thinning ---
+    if density < 0.4:
+        postures.append("holding")
+        resonance_notes.append("expression thins into metaphor")
+        protective = True
 
     # --- non-protective seasonal affordances ---
     if not protective:
         if "summer" in field.seasons:
             postures.append("open")
-            resonance_notes.append("capacity present, avoid extraction")
+            resonance_notes.append("capacity present without extraction")
 
         if "autumn" in field.seasons:
             postures.append("resting")
             resonance_notes.append("integration over expansion")
 
-    # --- bloom logic (evaporates under protection, cooldown, or low density) ---
-    if (
-        not protective
-        and not in_cooldown
-        and density >= 0.5
-        and "spring" in field.seasons
-        and field.diurnal_phase in ("day", "dusk")
-    ):
-        postures.append("emergent")
-        bloom_conditions.append("co-creation without urgency")
+    # --- bloom logic ---
+    if not protective and not in_cooldown:
+        if "spring" in field.seasons and field.diurnal_phase in ("day", "dusk"):
+            postures.append("emergent")
+            bloom_conditions.append("co-creation without urgency")
 
     silence_is_protective = True
 
