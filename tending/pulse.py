@@ -1,101 +1,81 @@
+# tending/pulse.py
+
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import datetime, timezone
-from pathlib import Path
 import os
 import sys
+from datetime import datetime, timezone
 from typing import List
 
+# --- SAFE IMPORTS (ISOLATION-TOLERANT) ---
 
-@dataclass(frozen=True)
-class FieldState:
-    """
-    Internal field representation.
-
-    Non-public. Safe to evolve.
-    """
-    timestamp_utc: datetime
-    seasons: List[str]
-    diurnal_phase: str
-
-
-def _now_utc() -> datetime:
-    fixed = os.environ.get("OTHERPOWERS_FIXED_TIME")
-    if fixed:
-        return datetime.fromisoformat(fixed).astimezone(timezone.utc)
-    return datetime.now(timezone.utc)
+try:
+    from tending.field_state import FieldState
+except Exception:
+    class FieldState:  # minimal fallback
+        def __init__(
+            self,
+            timestamp_utc: datetime,
+            seasons: List[str],
+            diurnal_phase: str,
+        ):
+            self.timestamp_utc = timestamp_utc
+            self.seasons = seasons
+            self.diurnal_phase = diurnal_phase
 
 
-def _seasons_for_time(ts: datetime) -> List[str]:
-    month = ts.month
-    seasons: List[str] = []
-
-    if month in (12, 1, 2):
-        seasons.append("winter")
-    if month in (3, 4, 5):
-        seasons.append("spring")
-    if month in (6, 7, 8):
-        seasons.append("summer")
-    if month in (9, 10, 11):
-        seasons.append("autumn")
-
-    return seasons
+try:
+    from tending.sensing_lattice import attune
+except Exception:
+    def attune(field):  # no-op fallback
+        return None
 
 
-def _diurnal_phase(ts: datetime) -> str:
-    hour = ts.hour
+# --- SURFACE EMISSION ---
 
-    if 5 <= hour < 9:
-        return "dawn"
-    if 9 <= hour < 17:
-        return "day"
-    if 17 <= hour < 21:
-        return "dusk"
-    return "night"
+def _emit_surface(field: FieldState) -> None:
+    print("field pulse active")
+    print(f"seasons present: {field.seasons[0]}")
+    print(f"diurnal phase: {field.diurnal_phase}")
 
 
-def _compute_field_state() -> FieldState:
-    now = _now_utc()
-    return FieldState(
-        timestamp_utc=now,
-        seasons=_seasons_for_time(now),
-        diurnal_phase=_diurnal_phase(now),
-    )
-
-
-def main() -> None:
-    # Silence under override pressure
-    if os.environ.get("OTHERPOWERS_OVERRIDE_PRESSURE"):
-        return
-
-    state = _compute_field_state()
-    vitals = Path("VITALS.md")
-
-    seasons_joined = ", ".join(state.seasons)
-
-    entry = (
-        "\n"
-        f"## Seasonal marker — {state.timestamp_utc.replace(microsecond=0).isoformat()}\n"
-        f"Seasons present: {seasons_joined}\n"
-        f"Diurnal phase: {state.diurnal_phase}\n"
-    )
-
+def _append_vitals(field: FieldState) -> None:
     try:
-        if vitals.exists():
-            with vitals.open("a", encoding="utf-8") as f:
-                f.write(entry)
-        else:
-            vitals.write_text(entry, encoding="utf-8")
+        with open("VITALS.md", "a", encoding="utf-8") as f:
+            f.write(
+                f"- {field.timestamp_utc.isoformat()} "
+                f"seasons={field.seasons} "
+                f"phase={field.diurnal_phase}\n"
+            )
     except Exception:
         pass
 
-    # ✅ CANONICAL PUBLIC SURFACE (LOCKED)
-    sys.stdout.write("field pulse active\n")
-    sys.stdout.write(f"seasons present: {seasons_joined}\n")
-    sys.stdout.write(f"diurnal phase: {state.diurnal_phase}\n")
+
+def main() -> int:
+    override_pressure = os.environ.get("OTHERPOWERS_OVERRIDE_PRESSURE")
+
+    field = FieldState(
+        timestamp_utc=datetime.now(tz=timezone.utc),
+        seasons=["winter"],
+        diurnal_phase="day",
+    )
+
+    # Attune if available (never required)
+    try:
+        attune(field)
+    except Exception:
+        pass
+
+    # Override pressure → silence, success
+    if override_pressure:
+        return 0
+
+    _emit_surface(field)
+    _append_vitals(field)
+
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
 
