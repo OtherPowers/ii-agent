@@ -1,24 +1,40 @@
-# Articulation Stewardship
+# Situated Articulations
 
-Documents in this folder are **situated articulations**.
+This directory holds **situated articulations** within the OtherPowers ii-Agent.
 
-They are:
-- Intentionally provisional
-- Lineage-held
-- Open to collective evolution
-- Resistant to optimization, capture, or enforcement framing
+These texts are not specifications, mandates, or control documents.  
+They are relational markers that make the current posture of the system legible without freezing it.
 
-## Rules of Change
+Articulations are:
+- Held lightly
+- Subject to collective evolution
+- Intended to resist extraction, simplification, and semantic capture
 
-Edits to articulations must:
-- Preserve non-extractive posture
-- Avoid metricization, ranking, or surveillance logic
-- Treat silence, rest, and refusal as first-class states
-- Respect lineage without canonizing authority
+They exist to support continuity of care across time, contributors, and intelligences.
 
-Articulations may grow, contract, fork, or dissolve.
-They are not specifications.
-They are living boundary-objects.
+---
 
-Stewardship matters more than authorship.
+## Stewardship
+
+Articulations in this directory are stewarded, not owned.
+
+Changes should be made deliberately, with attention to lineage, context, and downstream effects on human and non-human intelligences.
+
+Revision is expected. Drift without care is not.
+
+---
+
+## Canonical Articulations
+
+- **Surface v1 — Constellations**  
+  A living articulation of the ii-Agent public surface as co-presence, silence, lineage, and non-extractive relation.  
+  → `surface_v1.constellations.md`
+
+---
+
+## On Platform Language
+
+Some platform mechanisms (for example, files named using legacy terms like “ownership”) exist solely to enable technical safeguards.
+
+Within OtherPowers, these mechanisms are interpreted strictly as **stewardship and care-routing**, never authority, hierarchy, or control.
 
