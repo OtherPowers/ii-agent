@@ -1,58 +1,43 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from datetime import datetime
+from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import List
-
-
-@dataclass(frozen=True)
-class TemporalDecayCloud:
-    """
-    Residual harm or pressure that thins expressive capacity over time.
-    Decays naturally. Cannot be cleared by compliance or intent.
-    """
-
-    magnitude: float          # 0.0 – 1.0
-    half_life_hours: float
-    created_utc: datetime
-
-    def remaining(self, now: datetime) -> float:
-        elapsed_hours = (now - self.created_utc).total_seconds() / 3600
-        if elapsed_hours <= 0:
-            return self.magnitude
-
-        decay_factor = 0.5 ** (elapsed_hours / self.half_life_hours)
-        return max(0.0, self.magnitude * decay_factor)
+import os
 
 
 @dataclass(frozen=True)
 class FieldState:
     """
-    Atmospheric snapshot of the creative intelligence field.
+    Snapshot of the field.
 
-    No identity.
-    No memory.
-    No attribution.
+    This object is descriptive only.
+    It never evaluates, scores, or predicts.
     """
 
     timestamp_utc: datetime
     seasons: List[str]
     diurnal_phase: str
+    expressive_density: float = 1.0
 
-    decay_clouds: List[TemporalDecayCloud] = field(default_factory=list)
-    baseline_density: float = 1.0
-
-    @property
-    def expressive_density(self) -> float:
+    @classmethod
+    def now(cls) -> "FieldState":
         """
-        Remaining expressive capacity after temporal decay is applied.
-        """
+        Canonical field constructor.
 
-        residue = sum(
-            cloud.remaining(self.timestamp_utc)
-            for cloud in self.decay_clouds
+        Deterministic, timezone-safe, test-safe.
+        """
+        fixed = os.environ.get("OTHERPOWERS_FIXED_TIME")
+        if fixed:
+            ts = datetime.fromisoformat(fixed)
+        else:
+            ts = datetime.now(timezone.utc)
+
+        # Canonical minimal defaults
+        return cls(
+            timestamp_utc=ts,
+            seasons=["winter"],
+            diurnal_phase="day",
+            expressive_density=1.0,
         )
-
-        density = self.baseline_density - residue
-        return max(0.0, min(1.0, density))
 
