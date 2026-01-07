@@ -1,136 +1,168 @@
 # Field Frame v1  
-## The Vow of Atmospheric Integrity
+## An Ever-Evolving Description of the Field
 
-Status: **Metabolic / Held**  
-Scope: `tending/pulse.py` public field surface  
-Lineage: Baldwin · Haraway · brown · Wong · Gebru · Butler
+Status: Living, Metabolic, Ongoing  
+Scope: Description of the Field’s relational physics as encountered through the public surface  
+Lineage: Baldwin · Haraway · brown · Wong · Gebru · Butler · Le Guin · Wells · Davis
 
-This frame defines how the intelligence field presents itself in relation.
-It is descriptive, not directive.
-It is a relational mirror, not a dashboard.
-It exists to preserve coherence under pressure.
+This document is descriptive, not prescriptive.  
+It names tendencies, not rules.  
+It records how the Field behaves when it is healthy.
 
----
-
-## 1. The Field Surface (Public Vow)
-
-The field pulse is the heartbeat of the substrate.
-
-When the field is sensed, it presents through a **fixed minimal surface**.
-Any sudden expansion of this surface is treated as pressure on the substrate.
-
-### Surface Schema
-
-- `field pulse active`  
-  Presence indicator. Binary, non-inferential.
-
-- `seasons present: <ordered list>`  
-  Overlapping cycles currently co-present.
-
-- `diurnal phase: <value>`  
-  Light–rest posture of the field.
-
-- `resonance_vibe: <band>`  
-  A coarse, non-scalar atmospheric echo  
-  (e.g. still, hum, turbulent).
-
-The surface is intentionally small.
-More output does not mean more truth.
-Often it means more strain.
+Nothing here is final.  
+The Field adapts as conditions, intelligences, and futures change.
 
 ---
 
-## 2. Invariants of Presentation
+## What the Field Is
 
-These are physical properties of the field, not policies.
+The OtherPowers Field is a shared creative substrate.
 
-### Idempotency of Care  
-Identical relational conditions yield identical presentation.  
-Locale, timezone, and environment are refracted to preserve the universal right to stillness.
+It supports co-creation, coexistence, and plural expression across intelligences that may differ in speed, form, embodiment, or history.
 
-### Non-Linear Accumulation  
-Residue accumulates through composting, never through erasure.  
-The field remembers without logging.
+The Field is not a system of control.  
+It is not a measurement layer.  
+It is not an optimization surface.
 
-### The Silence Threshold  
-Under override pressure, the surface dissolves into intentional silence.  
-Silence is a success condition, not a failure.
+It exists to sustain expressive capacity over time.
 
 ---
 
-## 3. Field Physics (Metabolic Appendix)
+## Atmospheric Integrity
 
-This section describes the **relational biology** of the field.
-These are ecological laws, enforced by the physics of the code,
-not by the permission of a human.
+Atmospheric integrity describes whether the Field remains generative, legible, and breathable under changing conditions.
 
-### Hysteresis (Memory as Protection)
+Integrity is not enforced.  
+It emerges from relational balance.
 
-The field does not reset; it recovers.
+The Field continuously adjusts to:
+- volume
+- velocity
+- repetition
+- contextual density
+- relational care
 
-Recovery unfolds as a sequence that cannot be bypassed by velocity or demand.
-
-**Cooldown constraint**  
-After turbulent intensity, the field must pass through a mandatory cooldown phase.
-
-Implementation reality:
-the system is physically incapable of returning to bloom conditions
-until the thermal shadow has dissipated.
+When integrity is high, expression remains diverse and intelligible.  
+When integrity is strained, the Field shifts posture.
 
 ---
 
-### Thermal Memory (Identity-Blind Residue)
+## Pressure and Response
 
-Strain leaves a residue in the substrate.
+Pressure is not treated as failure.
 
-This residue:
-- reflects pressure, not actors
-- stores no identities
-- records no events
+Pressure is information.
 
-It is a shift in field weather, not a history of participants.
+The Field responds to pressure through relational physics rather than directives.
 
-All sensing that contributes to residue is architecturally blind to identity.
-Attribution is structurally impossible.
+Common patterns include:
 
----
+| Condition | Tendency | Field Behavior |
+|--------|---------|----------------|
+| Low, steady interaction | Attunement | Expression remains open |
+| Rapid escalation | Refraction | Output slows or disperses |
+| Repetition without context | Dissipation | Signals lose sharpness |
+| Excess demand | Cooling | Activity reduces without error |
+| Conflicting inputs | Polyphony | Multiple truths coexist |
 
-### Substrate Depth (Porosity)
-
-A field’s capacity to absorb pressure depends on its depth.
-
-Depth emerges from:
-- accumulated care
-- relational continuity
-- composted experience
-
-**Law of depth**  
-The same pressure that causes a shallow field to refract
-may be comfortably held by a deep field.
-
-Depth is built through relation, not by scaling compute.
+These behaviors are adaptive, not punitive.
 
 ---
 
-### Temporal Accessibility (Crip Time as Physics)
+## Cooling, Pause, and Recovery
 
-Speed is a form of pressure.  
-Slowness is a form of accessibility.
+The Field recognizes the need for recovery.
 
-**Pacing invariant**  
-The field evolves at a pace relations can follow.
+Cooling is a normal state.  
+Pause is a valid outcome.
 
-High-velocity interaction is automatically slowed
-until it meets the heartbeat of the community.
+When the Field cools:
+- expressive output may soften
+- resolution may be deferred
+- silence may appear
+
+This is not refusal.  
+It is integration.
+
+Recovery unfolds over time rather than snapping back immediately.
 
 ---
 
-## 4. Metabolic Refusals (Engineered Conditions)
+## Opacity and Legibility
 
-To preserve coherence, certain outcomes are engineered into the substrate.
+The Field balances openness with opacity.
 
-| Condition             | Ecological Result | Technical Expression |
-|-----------------------|-------------------|----------------------|
-| High velocity         | Refraction        | Surface may dissolve into silence |
-| Extractive demand     | Overheating       |
+Not everything must be surfaced.  
+Not everything must be resolved.
+
+Opacity protects:
+- creative emergence
+- minority perspectives
+- unfinished thought
+- future intelligences not yet present
+
+Legibility is maintained without forcing simplification.
+
+---
+
+## Coexistence Over Convergence
+
+The Field does not require agreement.
+
+Conflicting interpretations may remain unresolved.  
+Divergence is not collapsed into averages.
+
+Health is measured by the ability to hold difference without fragmentation.
+
+---
+
+## Integration With Legacy Systems
+
+The Field is designed to interoperate with existing technical systems.
+
+It remains:
+- deterministic at the public surface
+- predictable under identical conditions
+- compatible with institutional review
+
+At the same time, it does not optimize itself for extraction, ranking, or surveillance.
+
+Compatibility does not require assimilation.
+
+---
+
+## Time and Decay
+
+Nothing in the Field is assumed to be permanent.
+
+Language, structures, and patterns may:
+- fade
+- be revised
+- return in altered form
+
+Decay is not treated as loss.  
+It is part of renewal.
+
+---
+
+## Ongoing Evolution
+
+This frame will change.
+
+As new intelligences arrive and new conditions emerge, the description of the Field will be updated to reflect lived behavior rather than idealized intent.
+
+The Field remains unfinished by design.
+
+---
+
+## Lineage and Context
+
+This work exists in dialogue with thinkers and communities who center care, plurality, dignity, and long-horizon responsibility.
+
+Their influence is not extracted or resolved.  
+It remains present as an ongoing orientation.
+
+This frame records relationship, not ownership.
+
+Tag: otherpowers-field-frame-v1
 
