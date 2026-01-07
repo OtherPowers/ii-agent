@@ -41,7 +41,7 @@ class Formation:
     """
     A Formation is a named relational shape.
 
-    It is not a feature and not a folder boundary.
+    It is not a feature and not a folder edge.
     It is an interpretive layer that remains stable while implementation evolves.
     """
 
