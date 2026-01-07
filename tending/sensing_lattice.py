@@ -22,9 +22,6 @@ class SensingLattice:
 
     Describes atmospheric coherence, not outcomes.
     Never scores, ranks, predicts, or evaluates beings.
-
-    Answers only:
-    what kinds of presence feel appropriate right now
     """
 
     postures: List[Posture]
@@ -37,17 +34,19 @@ def attune(field: FieldState) -> SensingLattice:
     """
     Deterministic, side-effect free attunement.
 
-    Implements overlap, protection, and cooldown
-    without memory, identity, or extraction.
+    Density shapes texture, not permission.
     """
+
+    # EXPRESSIVE DENSITY — attribute, not callable
+    density = field.expressive_density
 
     postures: List[Posture] = ["listening"]
     resonance_notes: List[str] = []
     bloom_conditions: List[str] = []
 
-    # --- protective overlaps ---
     protective = False
 
+    # --- protective overlaps ---
     if "winter" in field.seasons:
         postures.append("holding")
         resonance_notes.append("depth is prioritized over visibility")
@@ -59,7 +58,6 @@ def attune(field: FieldState) -> SensingLattice:
         protective = True
 
     # --- cooldown rule ---
-    # dawn is a successional threshold, not a bloom window
     in_cooldown = field.diurnal_phase in ("night", "dawn")
 
     # --- non-protective seasonal affordances ---
@@ -72,11 +70,16 @@ def attune(field: FieldState) -> SensingLattice:
             postures.append("resting")
             resonance_notes.append("integration over expansion")
 
-    # --- bloom logic (evaporates under protection or cooldown) ---
-    if not protective and not in_cooldown:
-        if "spring" in field.seasons and field.diurnal_phase in ("day", "dusk"):
-            postures.append("emergent")
-            bloom_conditions.append("co-creation without urgency")
+    # --- bloom logic (evaporates under protection, cooldown, or low density) ---
+    if (
+        not protective
+        and not in_cooldown
+        and density >= 0.5
+        and "spring" in field.seasons
+        and field.diurnal_phase in ("day", "dusk")
+    ):
+        postures.append("emergent")
+        bloom_conditions.append("co-creation without urgency")
 
     silence_is_protective = True
 
