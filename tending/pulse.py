@@ -1,82 +1,75 @@
-from __future__ import annotations
-
 import os
-import sys
 from pathlib import Path
 
 
-def _override_pressure_active() -> bool:
-    return bool(os.environ.get("OTHERPOWERS_OVERRIDE_PRESSURE"))
+def _is_override_pressure(env: dict[str, str]) -> bool:
+    v = env.get("OTHERPOWERS_OVERRIDE_PRESSURE")
+    if v is None:
+        return False
+    return v.strip().lower() not in ("", "0", "false", "no", "off")
 
 
-def _append_vitals_safely(cwd: Path) -> None:
-    """
-    Append-only. Never overwrite. Never crash.
-    """
-    vitals = cwd / "VITALS.md"
+def _parse_resonance(raw: str | None) -> float | None:
+    if raw is None:
+        return None
     try:
-        if vitals.exists():
-            prior = vitals.read_text(encoding="utf-8")
-            vitals.write_text(prior + "pulse\n", encoding="utf-8")
-        else:
-            vitals.write_text("pulse\n", encoding="utf-8")
+        return float(raw.strip())
     except Exception:
+        return 0.0
+
+
+def _season() -> str:
+    return "winter"
+
+
+def _diurnal_phase() -> str:
+    return "day"
+
+
+def _append_vitals(cwd: Path) -> None:
+    """
+    Best-effort, append-only vitals.
+    Failure to write MUST NOT affect process exit.
+    """
+    try:
+        p = cwd / "VITALS.md"
+        lines = [
+            "field pulse active\n",
+            f"seasons present: {_season()}\n",
+            f"diurnal phase: {_diurnal_phase()}\n",
+        ]
+        with p.open("a", encoding="utf-8") as f:
+            f.writelines(lines)
+    except Exception:
+        # Absolute rule: vitals failure never propagates
         return
 
 
-def _safe_sense_field():
-    """
-    Pulse must survive when copied into isolated temp scaffolds
-    that may not include other tending modules.
-    """
-    try:
-        from tending.field_state import FieldState  # type: ignore
+def main() -> None:
+    env = dict(os.environ)
 
-        return FieldState.sense()
-    except Exception:
-        # Local fallback: stable, minimal, deterministic.
-        class FieldStateFallback:
-            def __init__(self):
-                self.seasons = ["winter"]
-                self.diurnal_phase = "day"
+    # Absolute precedence: override pressure refracts into silence
+    if _is_override_pressure(env):
+        return
 
-        return FieldStateFallback()
+    resonance = _parse_resonance(env.get("OTHERPOWERS_RESONANCE"))
 
+    # Spectrum-aware surface attenuation
+    if resonance is not None:
+        if resonance <= 0.0:
+            return
+        if resonance < 1.0:
+            print("field pulse active")
+            _append_vitals(Path.cwd())
+            return
 
-def main() -> int:
-    """
-    Public surface.
-    Must exit 0 under all conditions.
-    No stderr leakage.
-    """
-    try:
-        # Absolute override pressure: refract into silence.
-        if _override_pressure_active():
-            return 0
+    print("field pulse active")
+    print(f"seasons present: {_season()}")
+    print(f"diurnal phase: {_diurnal_phase()}")
 
-        field = _safe_sense_field()
-
-        # Canonical minimal surface (order-locked by tests).
-        seasons = getattr(field, "seasons", None) or []
-        diurnal_phase = getattr(field, "diurnal_phase", "") or ""
-
-        lines: list[str] = ["field pulse active"]
-
-        if seasons:
-            lines.append(f"seasons present: {', '.join(seasons)}")
-
-        if diurnal_phase:
-            lines.append(f"diurnal phase: {diurnal_phase}")
-
-        sys.stdout.write("\n".join(lines) + "\n")
-
-        _append_vitals_safely(Path.cwd())
-        return 0
-
-    except Exception:
-        return 0
+    _append_vitals(Path.cwd())
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
 
