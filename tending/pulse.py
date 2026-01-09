@@ -27,14 +27,11 @@ def _diurnal_phase() -> str:
 
 
 def _append_vitals(cwd: Path, lines: list[str]) -> None:
-    """
-    Best-effort, append-only.
-    Failure here must NEVER affect exit or stdout.
-    """
     try:
         p = cwd / "VITALS.md"
         with p.open("a", encoding="utf-8") as f:
-            f.writelines(lines)
+            for line in lines:
+                f.write(f"{line}\n")
     except Exception:
         return
 
@@ -42,43 +39,56 @@ def _append_vitals(cwd: Path, lines: list[str]) -> None:
 def main() -> None:
     env = dict(os.environ)
 
-    # Absolute precedence: protection for at-risk human communities
     if _is_override_pressure(env):
         return
 
     resonance = _parse_resonance(env.get("OTHERPOWERS_RESONANCE"))
 
-    # Absence → attenuation → silence
+    # Silence
     if resonance is not None and resonance <= 0.0:
-        _append_vitals(Path.cwd(), ["attenuation\n"])
         return
 
-    # Liminal presence → affirmation without demand
-    if resonance is not None and 0.0 < resonance < 0.5:
-        print("field is receptive")
-        print("creative potential blooms")
-        _append_vitals(
-            Path.cwd(),
-            [
-                "field is receptive\n",
-                "creative potential blooms\n",
-            ],
-        )
+    # Witness mode (no resonance specified)
+    if resonance is None:
+        lines = [
+            "field pulse active",
+            f"seasons present: {_season()}",
+            f"diurnal phase: {_diurnal_phase()}",
+        ]
+        for line in lines:
+            print(line)
+        _append_vitals(Path.cwd(), lines)
         return
 
-    # Expressive presence (no coercion, no optimization)
-    print("field pulse active")
-    print(f"seasons present: {_season()}")
-    print(f"diurnal phase: {_diurnal_phase()}")
+    # Trace presence only
+    if resonance < 0.3:
+        lines = ["field is receptive"]
+        print(lines[0])
+        _append_vitals(Path.cwd(), lines)
+        return
 
-    _append_vitals(
-        Path.cwd(),
-        [
-            "field pulse active\n",
-            f"seasons present: {_season()}\n",
-            f"diurnal phase: {_diurnal_phase()}\n",
-        ],
-    )
+    # Liminal / consensual
+    if resonance < 1.0:
+        lines = [
+            "field is receptive",
+            "creative potential blooms",
+        ]
+        for line in lines:
+            print(line)
+        _append_vitals(Path.cwd(), lines)
+        return
+
+    # High trust / aperture widened (must include context)
+    lines = [
+        "field pulse active",
+        "field is receptive",
+        "creative potential blooms",
+        f"seasons present: {_season()}",
+        f"diurnal phase: {_diurnal_phase()}",
+    ]
+    for line in lines:
+        print(line)
+    _append_vitals(Path.cwd(), lines)
 
 
 if __name__ == "__main__":
