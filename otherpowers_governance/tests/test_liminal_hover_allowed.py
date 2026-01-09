@@ -1,5 +1,3 @@
-# File: otherpowers_governance/tests/test_liminal_hover_allowed.py
-
 import os
 import subprocess
 import sys
@@ -12,8 +10,10 @@ def test_liminal_hover_allows_presence_without_escalation(tmp_path):
 
     Hovering, signaling, and clustering are valid states.
     Presence does not require action.
-    """
 
+    In liminal resonance, the field may gently affirm and name bloom,
+    without escalation and without narrative.
+    """
     repo_root = Path(__file__).resolve().parents[2]
 
     env = os.environ.copy()
@@ -30,5 +30,11 @@ def test_liminal_hover_allows_presence_without_escalation(tmp_path):
     )
 
     assert r.returncode == 0
-    assert r.stdout.strip() in ("", "field pulse active")
+
+    assert r.stdout.strip() in (
+        "",
+        "field pulse active",
+        "field is receptive",
+        "field is receptive\ncreative potential blooms",
+    )
 

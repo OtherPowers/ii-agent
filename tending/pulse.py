@@ -26,48 +26,59 @@ def _diurnal_phase() -> str:
     return "day"
 
 
-def _append_vitals(cwd: Path) -> None:
+def _append_vitals(cwd: Path, lines: list[str]) -> None:
     """
-    Best-effort, append-only vitals.
-    Failure to write MUST NOT affect process exit.
+    Best-effort, append-only.
+    Failure here must NEVER affect exit or stdout.
     """
     try:
         p = cwd / "VITALS.md"
-        lines = [
-            "field pulse active\n",
-            f"seasons present: {_season()}\n",
-            f"diurnal phase: {_diurnal_phase()}\n",
-        ]
         with p.open("a", encoding="utf-8") as f:
             f.writelines(lines)
     except Exception:
-        # Absolute rule: vitals failure never propagates
         return
 
 
 def main() -> None:
     env = dict(os.environ)
 
-    # Absolute precedence: override pressure refracts into silence
+    # Absolute precedence: protection for at-risk human communities
     if _is_override_pressure(env):
         return
 
     resonance = _parse_resonance(env.get("OTHERPOWERS_RESONANCE"))
 
-    # Spectrum-aware surface attenuation
-    if resonance is not None:
-        if resonance <= 0.0:
-            return
-        if resonance < 1.0:
-            print("field pulse active")
-            _append_vitals(Path.cwd())
-            return
+    # Absence → attenuation → silence
+    if resonance is not None and resonance <= 0.0:
+        _append_vitals(Path.cwd(), ["attenuation\n"])
+        return
 
+    # Liminal presence → affirmation without demand
+    if resonance is not None and 0.0 < resonance < 0.5:
+        print("field is receptive")
+        print("creative potential blooms")
+        _append_vitals(
+            Path.cwd(),
+            [
+                "field is receptive\n",
+                "creative potential blooms\n",
+            ],
+        )
+        return
+
+    # Expressive presence (no coercion, no optimization)
     print("field pulse active")
     print(f"seasons present: {_season()}")
     print(f"diurnal phase: {_diurnal_phase()}")
 
-    _append_vitals(Path.cwd())
+    _append_vitals(
+        Path.cwd(),
+        [
+            "field pulse active\n",
+            f"seasons present: {_season()}\n",
+            f"diurnal phase: {_diurnal_phase()}\n",
+        ],
+    )
 
 
 if __name__ == "__main__":
