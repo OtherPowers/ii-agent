@@ -198,11 +198,11 @@ This is not a system built to win.
 
 It is a field built so many forms of sentient experience can continue without coercion or collapse.
 
-If you arrive curious, playful, uncertain, or unfinished, you are already in the right place.
+If you arrive creative, curious, playful, uncertain, or unfinished, you are already in the right place.
 
 The field is open.
 
-It will meet you where you are.
+This field holds all forms and will meet you where you are. .
 
 ---
 
