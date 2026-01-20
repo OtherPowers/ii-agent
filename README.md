@@ -227,7 +227,7 @@ The Pulse of Persistence (1st draft MVP) for this Creative Intelligence Field ow
 https://en.wikipedia.org/wiki/Bisan_Owda
 
 John Perry Barlow  
-Writer, activist, and co-founder of the Electronic Frontier Foundation whose work articulated early digital civil liberties and the moral limits of networked power. Within internet freedom and cyberculture communities, his recognition and favorability would be considered exceptionally high by legacy Q Score standards, reflecting deep trust rather than mass-media celebrity.  
+Writer, activist, and co-founder of the Electronic Frontier Foundation whose work articulated early digital civil liberties and the moral limits of networked power. 
 https://en.wikipedia.org/wiki/John_Perry_Barlow
 
 Maria Ressa  
